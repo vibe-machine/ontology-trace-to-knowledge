@@ -1,32 +1,32 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-trace-to-knowledge
-# upstream-tag: v1.0.2
-# upstream-commit: 710cb9283a543d5530df9cdb3e2304c2ce89e987
+# upstream-tag: v1.0.3
+# upstream-commit: e138b5c48d8b37c0659a276ea968ab92ec948981
 # source-artifacts:
 # - package.json
 # - schema/traceToKnowledge.tql
 # - docs/translation/schema-docs.json
 # - tools/package_contract/refresh_package_contract.mjs
-# manifest: manifests/trace-to-knowledge-v1.0.2.package-manifest.json
+# manifest: manifests/trace-to-knowledge-v1.0.3.package-manifest.json
 # generator: trace-to-knowledge-package-refresh/0.1.0
 
 insert
 
 $build isa OntologyPackageBuild,
-  has buildKey "trace-to-knowledge@1.0.2:710cb9283a543d5530df9cdb3e2304c2ce89e987",
+  has buildKey "trace-to-knowledge@1.0.3:e138b5c48d8b37c0659a276ea968ab92ec948981",
   has packageName "trace-to-knowledge",
-  has packageVersion "1.0.2",
+  has packageVersion "1.0.3",
   has upstreamRepoUrl "https://github.com/vibe-machine/ontology-trace-to-knowledge",
-  has upstreamTag "v1.0.2",
-  has upstreamCommit "710cb9283a543d5530df9cdb3e2304c2ce89e987",
-  has manifestPath "manifests/trace-to-knowledge-v1.0.2.package-manifest.json",
+  has upstreamTag "v1.0.3",
+  has upstreamCommit "e138b5c48d8b37c0659a276ea968ab92ec948981",
+  has manifestPath "manifests/trace-to-knowledge-v1.0.3.package-manifest.json",
   has generatorName "trace-to-knowledge-package-refresh",
   has generatorVersion "0.1.0",
-  has generatedAt "2026-03-08T16:06:28.235Z";
+  has generatedAt "2026-03-08T22:41:40.954Z";
 
 $s1 isa SourceArtifactRecord,
   has sourcePath "package.json",
-  has sourceSha256 "e78efb4e7645646a9210fb89074ad30978a9b89e07c17939bf66f88eb3ce0ca8";
+  has sourceSha256 "4dd7a714d096d9addcd3a9a7e3ce61dcf7d2431e7fa0303f2ef3c12b2315a172";
 (build: $build, sourceArtifact: $s1) isa buildHasSourceArtifact;
 
 $s2 isa SourceArtifactRecord,
@@ -47,7 +47,7 @@ $s4 isa SourceArtifactRecord,
 $g1 isa GeneratedArtifactRecord,
   has artifactPath "data/trace-to-knowledge-schema-docs.tql",
   has artifactKind "documentation",
-  has artifactSha256 "7e63af8c0b92b282208c36a62b5fe0f4b283a8bd3ad54bdc2668ebdfb978409e";
+  has artifactSha256 "114a7f0c023c76355af1672cbd83c5ece69c1ad1d453d60363d06641c14b3750";
 (build: $build, generatedArtifact: $g1) isa buildHasGeneratedArtifact;
 
 $g2 isa GeneratedArtifactRecord,
