@@ -1,14 +1,10 @@
 name: ontology-release
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
   workflow_dispatch:
     inputs:
       mode:
-        description: validate-only, dry-run, or release
+        description: dry-run or release
         required: true
         default: dry-run
       bump:
@@ -26,14 +22,7 @@ on:
         default: false
 
 jobs:
-  validate:
-    if: github.event_name != 'workflow_dispatch'
-    uses: vibe-machine/ontology-tooling/.github/workflows/ontology-release.yml@main
-    with:
-      mode: validate-only
-
-  manual:
-    if: github.event_name == 'workflow_dispatch'
+  release:
     uses: vibe-machine/ontology-tooling/.github/workflows/ontology-release.yml@main
     with:
       mode: ${{ inputs.mode }}
