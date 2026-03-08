@@ -1,10 +1,11 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-trace-to-knowledge
 # upstream-tag: v1.0.0
-# upstream-commit: 6dc93a5f70d421ad14ba5572b8e383efd78f3b3e
+# upstream-commit: dddb2b974f9b79241c289a6fd56f7239cadce7dc
 # source-artifacts:
 # - package.json
 # - schema/traceToKnowledge.tql
+# - docs/translation/schema-docs.json
 # - tools/package_contract/refresh_package_contract.mjs
 # manifest: manifests/trace-to-knowledge-v1.0.0.package-manifest.json
 # generator: trace-to-knowledge-package-refresh/0.1.0
@@ -22,8 +23,8 @@ $r1 isa SchemaResource,
   has typeLabel "shodhMemoryId",
   has kind "attribute",
   has prefLabel "shodhMemoryId",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
+  has definition "Optional identifier assigned by an external Shodh memory system for the same knowledge record.", 
+  has scopeNote "Use when a T2K knowledge item is synchronized with an external memory store; omit it for purely local records.";
 (resource: $r1, module: $module) isa inModule;
 
 $r2 isa SchemaResource,
@@ -32,8 +33,8 @@ $r2 isa SchemaResource,
   has typeLabel "confidence",
   has kind "attribute",
   has prefLabel "confidence",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: double";
+  has definition "Numeric confidence score expressing how strongly the system or operator believes a claim or linkage is correct.", 
+  has scopeNote "Use a normalized score that is comparable within this package's workflows; relation-level confidence should qualify the specific assertion rather than the entity as a whole.";
 (resource: $r2, module: $module) isa inModule;
 
 $r3 isa SchemaResource,
@@ -42,8 +43,8 @@ $r3 isa SchemaResource,
   has typeLabel "verified",
   has kind "attribute",
   has prefLabel "verified",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: boolean";
+  has definition "Boolean flag indicating that a knowledge record or claim has been reviewed and explicitly confirmed by a trusted workflow.", 
+  has scopeNote "Verification is stronger than confidence. A high-confidence record may still be unverified.";
 (resource: $r3, module: $module) isa inModule;
 
 $r4 isa SchemaResource,
@@ -52,8 +53,8 @@ $r4 isa SchemaResource,
   has typeLabel "signatureText",
   has kind "attribute",
   has prefLabel "signatureText",
-  has definition "Signatures / indexing", 
-  has scopeNote "value type: string";
+  has definition "Canonical text used to match recurring trace patterns, failures, or fixes against previously captured knowledge.", 
+  has scopeNote "Keep this compact and match-oriented: stack trace fragments, normalized error text, or reduced signal strings.";
 (resource: $r4, module: $module) isa inModule;
 
 $r5 isa SchemaResource,
@@ -62,8 +63,8 @@ $r5 isa SchemaResource,
   has typeLabel "signalKind",
   has kind "attribute",
   has prefLabel "signalKind",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
+  has definition "Classifier describing what sort of signal a signature captures, such as error text, stack frame, tool output, or symptom phrase.", 
+  has scopeNote "This is a lightweight discriminator for retrieval and matching, not a full taxonomy.";
 (resource: $r5, module: $module) isa inModule;
 
 $r6 isa SchemaResource,
@@ -72,8 +73,8 @@ $r6 isa SchemaResource,
   has typeLabel "languageName",
   has kind "attribute",
   has prefLabel "languageName",
-  has definition "Scope tuple fields", 
-  has scopeNote "value type: string";
+  has definition "Programming or natural language associated with the scoped knowledge or observed run.", 
+  has scopeNote "Use for languages such as Swift, TypeScript, SQL, or English when that context changes applicability.";
 (resource: $r6, module: $module) isa inModule;
 
 $r7 isa SchemaResource,
@@ -82,8 +83,8 @@ $r7 isa SchemaResource,
   has typeLabel "toolName",
   has kind "attribute",
   has prefLabel "toolName",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
+  has definition "Name of the tool, executable, or subsystem whose behavior produced the trace or to which the knowledge applies.", 
+  has scopeNote "Examples include bd, TypeDB, xcodebuild, npm, or a specific internal service.";
 (resource: $r7, module: $module) isa inModule;
 
 $r8 isa SchemaResource,
@@ -92,8 +93,8 @@ $r8 isa SchemaResource,
   has typeLabel "packageName",
   has kind "attribute",
   has prefLabel "packageName",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
+  has definition "Package or module name that narrows where a knowledge item, scope, or run is relevant.", 
+  has scopeNote "Use when applicability is tied to a particular library, ontology package, or code module.";
 (resource: $r8, module: $module) isa inModule;
 
 $r9 isa SchemaResource,
@@ -102,8 +103,8 @@ $r9 isa SchemaResource,
   has typeLabel "packageVersion",
   has kind "attribute",
   has prefLabel "packageVersion",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
+  has definition "Version string for the package identified by packageName.", 
+  has scopeNote "Use when behavior changes across releases and the knowledge is version-sensitive.";
 (resource: $r9, module: $module) isa inModule;
 
 $r10 isa SchemaResource,
@@ -112,8 +113,8 @@ $r10 isa SchemaResource,
   has typeLabel "filePath",
   has kind "attribute",
   has prefLabel "filePath",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
+  has definition "Repository-relative or workspace-relative path that localizes where a knowledge item applies.", 
+  has scopeNote "Prefer stable, human-meaningful paths over transient build paths.";
 (resource: $r10, module: $module) isa inModule;
 
 $r11 isa SchemaResource,
@@ -122,8 +123,8 @@ $r11 isa SchemaResource,
   has typeLabel "symbolName",
   has kind "attribute",
   has prefLabel "symbolName",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
+  has definition "Function, type, command, target, or other named symbol that narrows the applicability of a scope.", 
+  has scopeNote "Use for the most stable identifier available at the code or tool boundary.";
 (resource: $r11, module: $module) isa inModule;
 
 $r12 isa SchemaResource,
@@ -132,8 +133,8 @@ $r12 isa SchemaResource,
   has typeLabel "payloadJson",
   has kind "attribute",
   has prefLabel "payloadJson",
-  has definition "Optional raw blob for external payloads", 
-  has scopeNote "value type: string";
+  has definition "Optional serialized raw payload preserved alongside modeled evidence when important source detail would otherwise be lost.", 
+  has scopeNote "Use sparingly for opaque or evolving external data; the modeled relations and attributes should still carry the primary semantics.";
 (resource: $r12, module: $module) isa inModule;
 
 $r13 isa SchemaResource,
@@ -142,7 +143,8 @@ $r13 isa SchemaResource,
   has typeLabel "KnowledgeItem",
   has kind "entity",
   has prefLabel "KnowledgeItem",
-  has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
+  has definition "Abstract reusable knowledge distilled from traces, observations, and prior work rather than a single raw event.", 
+  has scopeNote "Knowledge items are the central claims in T2K. They carry human-readable description, optional external identity, and links to evidence, signatures, scope, and lifecycle relations.";
 (resource: $r13, module: $module) isa inModule;
 
 $r14 isa SchemaResource,
@@ -151,8 +153,8 @@ $r14 isa SchemaResource,
   has typeLabel "FailurePattern",
   has kind "entity",
   has prefLabel "FailurePattern",
-  has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "subtype of KnowledgeItem";
+  has definition "A recurring failure mode or symptom pattern that can be recognized across multiple traces or incidents.", 
+  has scopeNote "Use for known breakages, characteristic error clusters, or stable problem signatures.";
 (resource: $r14, module: $module) isa inModule;
 
 $r15 isa SchemaResource,
@@ -161,8 +163,8 @@ $r15 isa SchemaResource,
   has typeLabel "FixPattern",
   has kind "entity",
   has prefLabel "FixPattern",
-  has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "subtype of KnowledgeItem";
+  has definition "A reusable corrective pattern that resolves or mitigates one or more failure patterns.", 
+  has scopeNote "A fix pattern describes what to change or apply, not just that an issue was resolved once.";
 (resource: $r15, module: $module) isa inModule;
 
 $r16 isa SchemaResource,
@@ -171,8 +173,8 @@ $r16 isa SchemaResource,
   has typeLabel "Procedure",
   has kind "entity",
   has prefLabel "Procedure",
-  has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "subtype of KnowledgeItem";
+  has definition "An ordered operational recipe for diagnosis, remediation, or verification.", 
+  has scopeNote "Use when the knowledge is fundamentally stepwise and may have prerequisites.";
 (resource: $r16, module: $module) isa inModule;
 
 $r17 isa SchemaResource,
@@ -181,8 +183,8 @@ $r17 isa SchemaResource,
   has typeLabel "Heuristic",
   has kind "entity",
   has prefLabel "Heuristic",
-  has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "subtype of KnowledgeItem";
+  has definition "A practical rule of thumb that guides interpretation, prioritization, or next action under uncertainty.", 
+  has scopeNote "Heuristics are intentionally approximate and should often be supported by evidence or contradicted by exceptions.";
 (resource: $r17, module: $module) isa inModule;
 
 $r18 isa SchemaResource,
@@ -191,7 +193,8 @@ $r18 isa SchemaResource,
   has typeLabel "Signature",
   has kind "entity",
   has prefLabel "Signature",
-  has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
+  has definition "Indexable matching artifact used to connect incoming traces to relevant knowledge items.", 
+  has scopeNote "A signature is not the knowledge itself. It is the retrieval hook that helps recognize when the knowledge applies.";
 (resource: $r18, module: $module) isa inModule;
 
 $r19 isa SchemaResource,
@@ -200,7 +203,8 @@ $r19 isa SchemaResource,
   has typeLabel "Scope",
   has kind "entity",
   has prefLabel "Scope",
-  has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
+  has definition "Atomic applicability bundle describing the environment or boundary within which a knowledge item is relevant.", 
+  has scopeNote "Scopes should stay factored and composable rather than becoming large free-form context blobs.";
 (resource: $r19, module: $module) isa inModule;
 
 $r20 isa SchemaResource,
@@ -209,7 +213,8 @@ $r20 isa SchemaResource,
   has typeLabel "EvidenceItem",
   has kind "entity",
   has prefLabel "EvidenceItem",
-  has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
+  has definition "Observed evidence extracted from traces, runs, logs, conversations, or other raw sources and used to support or derive knowledge.", 
+  has scopeNote "Evidence items preserve enough source detail to justify downstream claims without requiring the entire original trace structure.";
 (resource: $r20, module: $module) isa inModule;
 
 $r21 isa SchemaResource,
@@ -218,7 +223,8 @@ $r21 isa SchemaResource,
   has typeLabel "ExternalEvidence",
   has kind "entity",
   has prefLabel "ExternalEvidence",
-  has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
+  has definition "Reference to evidence that remains primarily owned by an external system but is linked into T2K for provenance.", 
+  has scopeNote "Use when the canonical artifact lives in another system such as GitHub, beads, CI, or an observability tool.";
 (resource: $r21, module: $module) isa inModule;
 
 $r22 isa SchemaResource,
@@ -227,7 +233,8 @@ $r22 isa SchemaResource,
   has typeLabel "Run",
   has kind "entity",
   has prefLabel "Run",
-  has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
+  has definition "Observed execution or tool invocation context in which evidence was produced.", 
+  has scopeNote "A run anchors evidence to a concrete occurrence, especially when the same knowledge can be extracted from repeated executions.";
 (resource: $r22, module: $module) isa inModule;
 
 $r23 isa SchemaResource,
@@ -236,7 +243,8 @@ $r23 isa SchemaResource,
   has typeLabel "Tag",
   has kind "entity",
   has prefLabel "Tag",
-  has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
+  has definition "Existing gist tag concept reused in T2K to label knowledge items with lightweight memory-oriented categories.", 
+  has scopeNote "Use Tag.uniqueText as the tag value; T2K does not define a parallel tag entity.";
 (resource: $r23, module: $module) isa inModule;
 
 $r24 isa SchemaResource,
@@ -245,7 +253,8 @@ $r24 isa SchemaResource,
   has typeLabel "resolves",
   has kind "relation",
   has prefLabel "resolves",
-  has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
+  has definition "Links a failure pattern to a fix pattern that addresses it.", 
+  has scopeNote "This is the core problem-to-remedy relation in the ontology. Confidence belongs on the relation because a fix may only probabilistically resolve a failure.";
 (resource: $r24, module: $module) isa inModule;
 
 $r25 isa SchemaResource,
@@ -254,7 +263,8 @@ $r25 isa SchemaResource,
   has typeLabel "signatureLink",
   has kind "relation",
   has prefLabel "signatureLink",
-  has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
+  has definition "Associates a knowledge item with a signature that can be used to retrieve it from future traces.", 
+  has scopeNote "Many signatures may point to the same knowledge item, and confidence may vary across those mappings.";
 (resource: $r25, module: $module) isa inModule;
 
 $r26 isa SchemaResource,
@@ -263,7 +273,8 @@ $r26 isa SchemaResource,
   has typeLabel "prerequisiteOf",
   has kind "relation",
   has prefLabel "prerequisiteOf",
-  has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
+  has definition "Orders knowledge items when one must already be understood or performed before another can be applied effectively.", 
+  has scopeNote "Most often used for procedures, but it can also express conceptual dependency between heuristics or fixes.";
 (resource: $r26, module: $module) isa inModule;
 
 $r27 isa SchemaResource,
@@ -272,7 +283,8 @@ $r27 isa SchemaResource,
   has typeLabel "supersedes",
   has kind "relation",
   has prefLabel "supersedes",
-  has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
+  has definition "States that a newer knowledge item replaces an older one as the preferred current guidance.", 
+  has scopeNote "Use for lifecycle transitions such as updated procedures, corrected heuristics, or modernized fix patterns.";
 (resource: $r27, module: $module) isa inModule;
 
 $r28 isa SchemaResource,
@@ -281,7 +293,8 @@ $r28 isa SchemaResource,
   has typeLabel "contradicts",
   has kind "relation",
   has prefLabel "contradicts",
-  has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
+  has definition "Marks two knowledge items as being in tension or direct conflict.", 
+  has scopeNote "Use when guidance cannot both be true in the same context, not merely when one is lower confidence.";
 (resource: $r28, module: $module) isa inModule;
 
 $r29 isa SchemaResource,
@@ -290,7 +303,8 @@ $r29 isa SchemaResource,
   has typeLabel "supportedBy",
   has kind "relation",
   has prefLabel "supportedBy",
-  has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
+  has definition "Connects a knowledge claim to the evidence that supports it.", 
+  has scopeNote "Support is provenance, not derivation. Use extractedFrom when the knowledge is distilled from a run/evidence combination.";
 (resource: $r29, module: $module) isa inModule;
 
 $r30 isa SchemaResource,
@@ -299,7 +313,8 @@ $r30 isa SchemaResource,
   has typeLabel "observedIn",
   has kind "relation",
   has prefLabel "observedIn",
-  has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
+  has definition "Locates an evidence item within the run that produced or exposed it.", 
+  has scopeNote "This keeps individual evidence items grounded in a specific execution context.";
 (resource: $r30, module: $module) isa inModule;
 
 $r31 isa SchemaResource,
@@ -308,7 +323,8 @@ $r31 isa SchemaResource,
   has typeLabel "extractedFrom",
   has kind "relation",
   has prefLabel "extractedFrom",
-  has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
+  has definition "Captures that a knowledge item was distilled from evidence observed in a specific run.", 
+  has scopeNote "This is the raw-trace to distilled-knowledge bridge that gives T2K its core provenance story.";
 (resource: $r31, module: $module) isa inModule;
 
 $r32 isa SchemaResource,
@@ -317,7 +333,8 @@ $r32 isa SchemaResource,
   has typeLabel "appliesTo",
   has kind "relation",
   has prefLabel "appliesTo",
-  has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
+  has definition "Scopes a knowledge item to the environment, package, tool, file, or symbol context where it is relevant.", 
+  has scopeNote "Use confidence here when applicability is probabilistic or inferred rather than absolute.";
 (resource: $r32, module: $module) isa inModule;
 
 $r33 isa SchemaResource,
@@ -326,7 +343,8 @@ $r33 isa SchemaResource,
   has typeLabel "hasMemoryTag",
   has kind "relation",
   has prefLabel "hasMemoryTag",
-  has definition "Reuse existing Tag with a domain-specific relation";
+  has definition "Attaches reusable tags to knowledge items for lightweight grouping, recall, and navigation.", 
+  has scopeNote "This relation is intentionally simple and complements, rather than replaces, explicit scope and evidence modeling.";
 (resource: $r33, module: $module) isa inModule;
 
 $r34 isa SchemaResource,
@@ -335,5 +353,6 @@ $r34 isa SchemaResource,
   has typeLabel "evidenceRef",
   has kind "relation",
   has prefLabel "evidenceRef",
-  has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
+  has definition "Connects a locally modeled evidence item to its external evidence reference.", 
+  has scopeNote "Use when T2K needs provenance back to an external system without copying the full external model into the ontology.";
 (resource: $r34, module: $module) isa inModule;

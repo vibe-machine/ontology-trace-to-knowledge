@@ -13,6 +13,10 @@ const GENERATOR = {
   version: "0.1.0",
 };
 
+async function readJson(relativePath) {
+  return JSON.parse(await fs.readFile(path.join(root, relativePath), "utf8"));
+}
+
 function escapeTypeQL(value) {
   return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 }
@@ -127,33 +131,41 @@ function buildScopeNote(resource) {
   return null;
 }
 
-function renderSchemaDocs(meta, resources) {
+function renderSchemaDocs(meta, resources, docsConfig) {
   const lines = [
     renderHeader(meta),
     "insert",
     "",
     "$module isa SchemaModule,",
     `  has moduleKey "${escapeTypeQL(meta.packageName)}",`,
-    `  has moduleName "${escapeTypeQL(meta.moduleName)}",`,
-    `  has moduleKind "${escapeTypeQL(meta.moduleKind)}";`,
+    `  has moduleName "${escapeTypeQL(docsConfig.module?.moduleName ?? meta.moduleName)}",`,
+    `  has moduleKind "${escapeTypeQL(docsConfig.module?.moduleKind ?? meta.moduleKind)}";`,
     "",
   ];
 
   resources.forEach((resource, index) => {
     const variable = `$r${index + 1}`;
     const docKey = `${meta.repoUrl}#${resource.typeLabel}`;
-    const definition = buildDefinition(resource);
-    const scopeNote = buildScopeNote(resource);
+    const override = docsConfig.resources?.[resource.typeLabel] ?? {};
+    const definition = override.definition ?? buildDefinition(resource);
+    const scopeNote = override.scopeNote ?? buildScopeNote(resource);
+    const example = override.example ?? null;
+    const editorialNote = override.editorialNote ?? null;
     lines.push(`${variable} isa SchemaResource,`);
     lines.push(`  has docKey "${escapeTypeQL(docKey)}",`);
     lines.push(`  has iri "${escapeTypeQL(docKey)}",`);
     lines.push(`  has typeLabel "${escapeTypeQL(resource.typeLabel)}",`);
     lines.push(`  has kind "${escapeTypeQL(resource.kind)}",`);
     lines.push(`  has prefLabel "${escapeTypeQL(resource.typeLabel)}",`);
-    lines.push(`  has definition "${escapeTypeQL(definition)}"${scopeNote ? "," : ";"} `);
-    if (scopeNote) {
-      lines.push(`  has scopeNote "${escapeTypeQL(scopeNote)}";`);
-    }
+    const extraProperties = [];
+    if (scopeNote) extraProperties.push(`  has scopeNote "${escapeTypeQL(scopeNote)}"`);
+    if (example) extraProperties.push(`  has example "${escapeTypeQL(example)}"`);
+    if (editorialNote) extraProperties.push(`  has editorialNote "${escapeTypeQL(editorialNote)}"`);
+    lines.push(`  has definition "${escapeTypeQL(definition)}"${extraProperties.length > 0 ? "," : ";"} `);
+    extraProperties.forEach((propertyLine, propertyIndex) => {
+      const suffix = propertyIndex === extraProperties.length - 1 ? ";" : ",";
+      lines.push(`${propertyLine}${suffix}`);
+    });
     lines.push(`(resource: ${variable}, module: $module) isa inModule;`);
     lines.push("");
   });
@@ -219,7 +231,8 @@ async function main() {
   const docsPath = "data/trace-to-knowledge-schema-docs.tql";
   const provenancePath = "data/trace-to-knowledge-provenance.tql";
   const manifestSchemaPath = "manifests/package-manifest.schema.json";
-  const sourcePaths = ["package.json", schemaPath, "tools/package_contract/refresh_package_contract.mjs"];
+  const docsSourcePath = "docs/translation/schema-docs.json";
+  const sourcePaths = ["package.json", schemaPath, docsSourcePath, "tools/package_contract/refresh_package_contract.mjs"];
 
   const commit = execFileSync("git", ["rev-parse", "HEAD"], {
     cwd: root,
@@ -236,6 +249,7 @@ async function main() {
   }
 
   const schemaText = await fs.readFile(path.join(root, schemaPath), "utf8");
+  const docsConfig = await readJson(docsSourcePath);
   const resources = collectDeclarations(schemaText);
   const headerMeta = {
     repoUrl: packageJson.source,
@@ -249,7 +263,7 @@ async function main() {
     moduleKind: "hand-authored-package",
   };
 
-  const docsText = renderSchemaDocs(headerMeta, resources);
+  const docsText = renderSchemaDocs(headerMeta, resources, docsConfig);
   await fs.writeFile(path.join(root, docsPath), docsText, "utf8");
 
   const manifest = {

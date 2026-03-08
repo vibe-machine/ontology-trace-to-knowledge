@@ -1,0 +1,144 @@
+{
+  "module": {
+    "moduleName": "Trace-to-Knowledge",
+    "moduleKind": "hand-authored-package"
+  },
+  "resources": {
+    "shodhMemoryId": {
+      "definition": "Optional identifier assigned by an external Shodh memory system for the same knowledge record.",
+      "scopeNote": "Use when a T2K knowledge item is synchronized with an external memory store; omit it for purely local records."
+    },
+    "confidence": {
+      "definition": "Numeric confidence score expressing how strongly the system or operator believes a claim or linkage is correct.",
+      "scopeNote": "Use a normalized score that is comparable within this package's workflows; relation-level confidence should qualify the specific assertion rather than the entity as a whole."
+    },
+    "verified": {
+      "definition": "Boolean flag indicating that a knowledge record or claim has been reviewed and explicitly confirmed by a trusted workflow.",
+      "scopeNote": "Verification is stronger than confidence. A high-confidence record may still be unverified."
+    },
+    "signatureText": {
+      "definition": "Canonical text used to match recurring trace patterns, failures, or fixes against previously captured knowledge.",
+      "scopeNote": "Keep this compact and match-oriented: stack trace fragments, normalized error text, or reduced signal strings."
+    },
+    "signalKind": {
+      "definition": "Classifier describing what sort of signal a signature captures, such as error text, stack frame, tool output, or symptom phrase.",
+      "scopeNote": "This is a lightweight discriminator for retrieval and matching, not a full taxonomy."
+    },
+    "languageName": {
+      "definition": "Programming or natural language associated with the scoped knowledge or observed run.",
+      "scopeNote": "Use for languages such as Swift, TypeScript, SQL, or English when that context changes applicability."
+    },
+    "toolName": {
+      "definition": "Name of the tool, executable, or subsystem whose behavior produced the trace or to which the knowledge applies.",
+      "scopeNote": "Examples include bd, TypeDB, xcodebuild, npm, or a specific internal service."
+    },
+    "packageName": {
+      "definition": "Package or module name that narrows where a knowledge item, scope, or run is relevant.",
+      "scopeNote": "Use when applicability is tied to a particular library, ontology package, or code module."
+    },
+    "packageVersion": {
+      "definition": "Version string for the package identified by packageName.",
+      "scopeNote": "Use when behavior changes across releases and the knowledge is version-sensitive."
+    },
+    "filePath": {
+      "definition": "Repository-relative or workspace-relative path that localizes where a knowledge item applies.",
+      "scopeNote": "Prefer stable, human-meaningful paths over transient build paths."
+    },
+    "symbolName": {
+      "definition": "Function, type, command, target, or other named symbol that narrows the applicability of a scope.",
+      "scopeNote": "Use for the most stable identifier available at the code or tool boundary."
+    },
+    "payloadJson": {
+      "definition": "Optional serialized raw payload preserved alongside modeled evidence when important source detail would otherwise be lost.",
+      "scopeNote": "Use sparingly for opaque or evolving external data; the modeled relations and attributes should still carry the primary semantics."
+    },
+    "KnowledgeItem": {
+      "definition": "Abstract reusable knowledge distilled from traces, observations, and prior work rather than a single raw event.",
+      "scopeNote": "Knowledge items are the central claims in T2K. They carry human-readable description, optional external identity, and links to evidence, signatures, scope, and lifecycle relations."
+    },
+    "FailurePattern": {
+      "definition": "A recurring failure mode or symptom pattern that can be recognized across multiple traces or incidents.",
+      "scopeNote": "Use for known breakages, characteristic error clusters, or stable problem signatures."
+    },
+    "FixPattern": {
+      "definition": "A reusable corrective pattern that resolves or mitigates one or more failure patterns.",
+      "scopeNote": "A fix pattern describes what to change or apply, not just that an issue was resolved once."
+    },
+    "Procedure": {
+      "definition": "An ordered operational recipe for diagnosis, remediation, or verification.",
+      "scopeNote": "Use when the knowledge is fundamentally stepwise and may have prerequisites."
+    },
+    "Heuristic": {
+      "definition": "A practical rule of thumb that guides interpretation, prioritization, or next action under uncertainty.",
+      "scopeNote": "Heuristics are intentionally approximate and should often be supported by evidence or contradicted by exceptions."
+    },
+    "Signature": {
+      "definition": "Indexable matching artifact used to connect incoming traces to relevant knowledge items.",
+      "scopeNote": "A signature is not the knowledge itself. It is the retrieval hook that helps recognize when the knowledge applies."
+    },
+    "Scope": {
+      "definition": "Atomic applicability bundle describing the environment or boundary within which a knowledge item is relevant.",
+      "scopeNote": "Scopes should stay factored and composable rather than becoming large free-form context blobs."
+    },
+    "EvidenceItem": {
+      "definition": "Observed evidence extracted from traces, runs, logs, conversations, or other raw sources and used to support or derive knowledge.",
+      "scopeNote": "Evidence items preserve enough source detail to justify downstream claims without requiring the entire original trace structure."
+    },
+    "ExternalEvidence": {
+      "definition": "Reference to evidence that remains primarily owned by an external system but is linked into T2K for provenance.",
+      "scopeNote": "Use when the canonical artifact lives in another system such as GitHub, beads, CI, or an observability tool."
+    },
+    "Run": {
+      "definition": "Observed execution or tool invocation context in which evidence was produced.",
+      "scopeNote": "A run anchors evidence to a concrete occurrence, especially when the same knowledge can be extracted from repeated executions."
+    },
+    "Tag": {
+      "definition": "Existing gist tag concept reused in T2K to label knowledge items with lightweight memory-oriented categories.",
+      "scopeNote": "Use Tag.uniqueText as the tag value; T2K does not define a parallel tag entity."
+    },
+    "resolves": {
+      "definition": "Links a failure pattern to a fix pattern that addresses it.",
+      "scopeNote": "This is the core problem-to-remedy relation in the ontology. Confidence belongs on the relation because a fix may only probabilistically resolve a failure."
+    },
+    "signatureLink": {
+      "definition": "Associates a knowledge item with a signature that can be used to retrieve it from future traces.",
+      "scopeNote": "Many signatures may point to the same knowledge item, and confidence may vary across those mappings."
+    },
+    "prerequisiteOf": {
+      "definition": "Orders knowledge items when one must already be understood or performed before another can be applied effectively.",
+      "scopeNote": "Most often used for procedures, but it can also express conceptual dependency between heuristics or fixes."
+    },
+    "supersedes": {
+      "definition": "States that a newer knowledge item replaces an older one as the preferred current guidance.",
+      "scopeNote": "Use for lifecycle transitions such as updated procedures, corrected heuristics, or modernized fix patterns."
+    },
+    "contradicts": {
+      "definition": "Marks two knowledge items as being in tension or direct conflict.",
+      "scopeNote": "Use when guidance cannot both be true in the same context, not merely when one is lower confidence."
+    },
+    "supportedBy": {
+      "definition": "Connects a knowledge claim to the evidence that supports it.",
+      "scopeNote": "Support is provenance, not derivation. Use extractedFrom when the knowledge is distilled from a run/evidence combination."
+    },
+    "observedIn": {
+      "definition": "Locates an evidence item within the run that produced or exposed it.",
+      "scopeNote": "This keeps individual evidence items grounded in a specific execution context."
+    },
+    "extractedFrom": {
+      "definition": "Captures that a knowledge item was distilled from evidence observed in a specific run.",
+      "scopeNote": "This is the raw-trace to distilled-knowledge bridge that gives T2K its core provenance story."
+    },
+    "appliesTo": {
+      "definition": "Scopes a knowledge item to the environment, package, tool, file, or symbol context where it is relevant.",
+      "scopeNote": "Use confidence here when applicability is probabilistic or inferred rather than absolute."
+    },
+    "hasMemoryTag": {
+      "definition": "Attaches reusable tags to knowledge items for lightweight grouping, recall, and navigation.",
+      "scopeNote": "This relation is intentionally simple and complements, rather than replaces, explicit scope and evidence modeling."
+    },
+    "evidenceRef": {
+      "definition": "Connects a locally modeled evidence item to its external evidence reference.",
+      "scopeNote": "Use when T2K needs provenance back to an external system without copying the full external model into the ontology."
+    }
+  }
+}

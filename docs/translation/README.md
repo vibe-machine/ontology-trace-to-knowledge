@@ -12,6 +12,8 @@ Current package boundaries:
 Current status:
 
 - `schema/traceToKnowledge.tql` is the hand-authored source of truth for the ontology model and assumes the `gist` dependency is loaded first.
+- `docs/translation/schema-model.md` is the human-oriented explanation of the T2K conceptual model.
+- `docs/translation/schema-docs.json` is the hand-authored documentation source used to generate queryable schema docs.
 - `data/trace-to-knowledge-schema-docs.tql` is generated from the schema and is the authoritative documentation path for package-local schema resources.
 - `data/trace-to-knowledge-provenance.tql` records the package build, source artifacts, and generated artifact checksums.
 - `manifests/trace-to-knowledge-v1.0.0.package-manifest.json` is the filesystem source of truth for the package contract.
