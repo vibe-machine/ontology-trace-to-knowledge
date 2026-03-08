@@ -1,12 +1,13 @@
 # Provenance bootstrap
-# upstream-repo: https://github.com/your-org/ontology-my-domain
+# upstream-repo: https://github.com/vibe-machine/ontology-trace-to-knowledge
 # upstream-tag: v1.0.0
-# upstream-commit: 1a00ddec256cf993113f93fcd1f9354c76f090da
+# upstream-commit: 8e485bc511322b92bfb69e27c92fca457b232d84
 # source-artifacts:
 # - package.json
-# - schema/myDomain.tql
-# manifest: manifests/my-domain-v1.0.0.package-manifest.json
-# generator: hand-authored-package-bootstrap/0.1.0
+# - schema/traceToKnowledge.tql
+# - tools/package_contract/refresh_package_contract.mjs
+# manifest: manifests/trace-to-knowledge-v1.0.0.package-manifest.json
+# generator: trace-to-knowledge-package-refresh/0.1.0
 define
 
 attribute docKey, value string;

@@ -1,45 +1,48 @@
 {
-  "$schema": "./package-manifest.schema.json",
   "manifestVersion": "1.0.0",
   "package": {
-    "name": "my-domain",
+    "name": "trace-to-knowledge",
     "version": "1.0.0"
   },
   "upstream": {
-    "repoUrl": "https://github.com/your-org/ontology-my-domain",
+    "repoUrl": "https://github.com/vibe-machine/ontology-trace-to-knowledge",
     "tag": "v1.0.0",
-    "commit": "db9ab3d15b21db6873822987766ed056255e8582",
+    "commit": "8e485bc511322b92bfb69e27c92fca457b232d84",
     "sourceArtifacts": [
       {
         "path": "package.json",
-        "sha256": "f3cbff553a75ca9bee3327970076fa272edc13f3b33db7d39d7d104bfb05a0aa"
+        "sha256": "847a16c81636364dbfe055e03ac34bdee69d3dd537b73da17b20a409097ba388"
       },
       {
-        "path": "schema/myDomain.tql",
-        "sha256": "133f4792da4b6cdc375cfcc95fe8bebb3ff25e36b4712a0c2ee6ea603364f462"
+        "path": "schema/traceToKnowledge.tql",
+        "sha256": "997f65db9839d75bb083783c20c949058e9120d356aa579236e38714db8dd0f7"
+      },
+      {
+        "path": "tools/package_contract/refresh_package_contract.mjs",
+        "sha256": "7308d2d6ec033c831e560f8521958c468f1bb38a5f8f3342f3190c3bccb2e33a"
       }
     ]
   },
   "generator": {
-    "name": "hand-authored-package-bootstrap",
+    "name": "trace-to-knowledge-package-refresh",
     "version": "0.1.0",
-    "generatedAt": "2026-03-08T01:08:07Z"
+    "generatedAt": "2026-03-08T03:44:53.349Z"
   },
   "artifacts": [
     {
       "kind": "meta-schema",
       "path": "schema/self-describing-schema.tql",
-      "sha256": "7cb2e95a36dc8998913dbce3755c7bf66b7614058b79fb119db44dd0246335f0"
+      "sha256": "27b979a7ce9ba17ab97247ad2480b971c4b54e146ed0a6f1f3adae127ea35bee"
     },
     {
       "kind": "provenance-schema",
       "path": "schema/package-provenance.tql",
-      "sha256": "acba484bdbd2505ef9b5e25c0e86c087d3b3b21a151718cb139dd4dd6ee7b64c"
+      "sha256": "1aae26132ec31dc8ac6d30ed1b6e8790ca56f65380886efa75b86d1ef188b8ca"
     },
     {
       "kind": "documentation",
-      "path": "data/my-domain-schema-docs.tql",
-      "sha256": "7770ed569a5227277ef6cd30b5a4dae71e258d562d63d6567f298000a0a6c548"
+      "path": "data/trace-to-knowledge-schema-docs.tql",
+      "sha256": "c333307d5a60624403d1ed8cdd5f10381a3d168b31451c7b6e99f2947656c42e"
     },
     {
       "kind": "manifest-schema",
@@ -48,8 +51,8 @@
     },
     {
       "kind": "provenance-seeds",
-      "path": "data/my-domain-provenance.tql",
-      "sha256": "d60d0b53dd6b411697d80e60beb5e81b2b5161bf8ca279a1fb3743176d4bfe97"
+      "path": "data/trace-to-knowledge-provenance.tql",
+      "sha256": "facf42aa98ffbeb05e2379de16e425032660bb492e8944b125328c52e2c74918"
     }
   ]
 }
