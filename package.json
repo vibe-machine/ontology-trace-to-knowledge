@@ -1,7 +1,7 @@
 {
   "name": "trace-to-knowledge",
   "displayName": "Trace-to-Knowledge",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Trace-to-Knowledge (T2K): high-signal ontology for distilling raw traces into reusable knowledge.",
   "author": "vibe-machine",
   "license": "MIT",
@@ -32,7 +32,7 @@
     "release:check": "../ontology-tooling/bin/ontology-release --repo . --validate-only"
   },
   "manifests": [
-    "manifests/trace-to-knowledge-v1.0.3.package-manifest.json"
+    "manifests/trace-to-knowledge-v1.0.4.package-manifest.json"
   ],
   "assembly": {
     "loadOrder": [
@@ -44,11 +44,11 @@
       "data/trace-to-knowledge-schema-docs.tql",
       "data/trace-to-knowledge-provenance.tql",
       "manifests/package-manifest.schema.json",
-      "manifests/trace-to-knowledge-v1.0.3.package-manifest.json"
+      "manifests/trace-to-knowledge-v1.0.4.package-manifest.json"
     ]
   },
   "provenance": {
-    "manifest": "manifests/trace-to-knowledge-v1.0.3.package-manifest.json",
+    "manifest": "manifests/trace-to-knowledge-v1.0.4.package-manifest.json",
     "status": "bootstrap"
   }
 }

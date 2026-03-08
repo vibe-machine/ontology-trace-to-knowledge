@@ -1,55 +1,57 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-trace-to-knowledge
-# upstream-tag: v1.0.3
-# upstream-commit: e138b5c48d8b37c0659a276ea968ab92ec948981
+# upstream-tag: v1.0.4
+# upstream-commit: 6193193fe5791bc57c9c39ba1e0a53bc4a2827c5
 # source-artifacts:
 # - package.json
 # - schema/traceToKnowledge.tql
 # - docs/translation/schema-docs.json
 # - tools/package_contract/refresh_package_contract.mjs
-# manifest: manifests/trace-to-knowledge-v1.0.3.package-manifest.json
+# manifest: manifests/trace-to-knowledge-v1.0.4.package-manifest.json
 # generator: trace-to-knowledge-package-refresh/0.1.0
 
-put $build isa OntologyPackageBuild,
-  has buildKey "trace-to-knowledge@1.0.3:e138b5c48d8b37c0659a276ea968ab92ec948981",
+insert
+
+$build isa OntologyPackageBuild,
+  has buildKey "trace-to-knowledge@1.0.4:6193193fe5791bc57c9c39ba1e0a53bc4a2827c5",
   has packageName "trace-to-knowledge",
-  has packageVersion "1.0.3",
+  has packageVersion "1.0.4",
   has upstreamRepoUrl "https://github.com/vibe-machine/ontology-trace-to-knowledge",
-  has upstreamTag "v1.0.3",
-  has upstreamCommit "e138b5c48d8b37c0659a276ea968ab92ec948981",
-  has manifestPath "manifests/trace-to-knowledge-v1.0.3.package-manifest.json",
+  has upstreamTag "v1.0.4",
+  has upstreamCommit "6193193fe5791bc57c9c39ba1e0a53bc4a2827c5",
+  has manifestPath "manifests/trace-to-knowledge-v1.0.4.package-manifest.json",
   has generatorName "trace-to-knowledge-package-refresh",
   has generatorVersion "0.1.0",
-  has generatedAt "2026-03-08T22:41:40.954Z";
+  has generatedAt "2026-03-08T23:41:19.603Z";
 
-put $s1 isa SourceArtifactRecord,
+$s1 isa SourceArtifactRecord,
   has sourcePath "package.json",
-  has sourceSha256 "4dd7a714d096d9addcd3a9a7e3ce61dcf7d2431e7fa0303f2ef3c12b2315a172";
-put (build: $build, sourceArtifact: $s1) isa buildHasSourceArtifact;
+  has sourceSha256 "e9de64955a924852de7d05c2ce51d0dbb9b84c36f68b3f2e3b69edeeee74b08a";
+(build: $build, sourceArtifact: $s1) isa buildHasSourceArtifact;
 
-put $s2 isa SourceArtifactRecord,
+$s2 isa SourceArtifactRecord,
   has sourcePath "schema/traceToKnowledge.tql",
   has sourceSha256 "3a264aa23dde48c839ca758a587b2047a951e153491cf08a0de081e16f1b796a";
-put (build: $build, sourceArtifact: $s2) isa buildHasSourceArtifact;
+(build: $build, sourceArtifact: $s2) isa buildHasSourceArtifact;
 
-put $s3 isa SourceArtifactRecord,
+$s3 isa SourceArtifactRecord,
   has sourcePath "docs/translation/schema-docs.json",
   has sourceSha256 "856bea90f656db7cbe6c6481e1ea38d134bb96618500c451e4be86a8e6f3e6e2";
-put (build: $build, sourceArtifact: $s3) isa buildHasSourceArtifact;
+(build: $build, sourceArtifact: $s3) isa buildHasSourceArtifact;
 
-put $s4 isa SourceArtifactRecord,
+$s4 isa SourceArtifactRecord,
   has sourcePath "tools/package_contract/refresh_package_contract.mjs",
   has sourceSha256 "2ecf880a21e89e19cd9d11b08edd14f57a33055a65a0b39de798b2501c6e7230";
-put (build: $build, sourceArtifact: $s4) isa buildHasSourceArtifact;
+(build: $build, sourceArtifact: $s4) isa buildHasSourceArtifact;
 
-put $g1 isa GeneratedArtifactRecord,
+$g1 isa GeneratedArtifactRecord,
   has artifactPath "data/trace-to-knowledge-schema-docs.tql",
   has artifactKind "documentation",
-  has artifactSha256 "114a7f0c023c76355af1672cbd83c5ece69c1ad1d453d60363d06641c14b3750";
-put (build: $build, generatedArtifact: $g1) isa buildHasGeneratedArtifact;
+  has artifactSha256 "48015d8bf287c89c6d207f39d33f3544db0ae72143d20cc0cb25ab47215fe0bb";
+(build: $build, generatedArtifact: $g1) isa buildHasGeneratedArtifact;
 
-put $g2 isa GeneratedArtifactRecord,
+$g2 isa GeneratedArtifactRecord,
   has artifactPath "manifests/package-manifest.schema.json",
   has artifactKind "manifest-schema",
   has artifactSha256 "07599fe20623f3304bec0987320050f12efc1faf04fad7c12176ffe88e0b6a48";
-put (build: $build, generatedArtifact: $g2) isa buildHasGeneratedArtifact;
+(build: $build, generatedArtifact: $g2) isa buildHasGeneratedArtifact;
