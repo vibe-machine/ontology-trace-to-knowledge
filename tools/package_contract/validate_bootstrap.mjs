@@ -51,11 +51,7 @@ async function main() {
     assertCondition(actual === artifact.sha256, `generated artifact hash mismatch: ${artifact.path}`);
   }
 
-  const headerFiles = [
-    "schema/self-describing-schema.tql",
-    "schema/package-provenance.tql",
-    ...manifest.artifacts.filter((artifact) => artifact.path.endsWith(".tql")).map((artifact) => artifact.path),
-  ];
+  const headerFiles = manifest.artifacts.filter((artifact) => artifact.path.endsWith(".tql")).map((artifact) => artifact.path);
 
   const expectedHeader = `# manifest: ${manifestPath}`;
   for (const relativePath of new Set(headerFiles)) {

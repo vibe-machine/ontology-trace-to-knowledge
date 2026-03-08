@@ -9,14 +9,6 @@
   "prefix": "t2k",
   "schemas": [
     {
-      "name": "self-describing-schema",
-      "file": "schema/self-describing-schema.tql"
-    },
-    {
-      "name": "package-provenance",
-      "file": "schema/package-provenance.tql"
-    },
-    {
       "name": "traceToKnowledge",
       "file": "schema/traceToKnowledge.tql"
     }
@@ -24,6 +16,12 @@
   "data": [
     "data/trace-to-knowledge-provenance.tql",
     "data/trace-to-knowledge-schema-docs.tql"
+  ],
+  "dependencies": [
+    {
+      "name": "gist",
+      "version": ">=14.0.0"
+    }
   ],
   "scripts": {
     "refresh:package-contract": "node tools/package_contract/refresh_package_contract.mjs",
@@ -36,15 +34,11 @@
   ],
   "assembly": {
     "loadOrder": [
-      "schema/self-describing-schema.tql",
-      "schema/package-provenance.tql",
       "schema/traceToKnowledge.tql",
       "data/trace-to-knowledge-provenance.tql",
       "data/trace-to-knowledge-schema-docs.tql"
     ],
     "generatedArtifacts": [
-      "schema/self-describing-schema.tql",
-      "schema/package-provenance.tql",
       "data/trace-to-knowledge-schema-docs.tql",
       "data/trace-to-knowledge-provenance.tql",
       "manifests/package-manifest.schema.json",

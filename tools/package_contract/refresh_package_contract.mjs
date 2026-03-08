@@ -44,10 +44,6 @@ function renderHeader({ repoUrl, tag, commit, sourceArtifacts, manifestPath, gen
   ].join("\n");
 }
 
-function stripLeadingHeader(text) {
-  return text.replace(/^(?:#.*\n)+/m, "");
-}
-
 function collectDeclarations(schemaText) {
   const resources = [];
   const lines = schemaText.split("\n");
@@ -253,13 +249,6 @@ async function main() {
     moduleKind: "hand-authored-package",
   };
 
-  for (const sharedSchemaPath of ["schema/self-describing-schema.tql", "schema/package-provenance.tql"]) {
-    const absolutePath = path.join(root, sharedSchemaPath);
-    const existing = await fs.readFile(absolutePath, "utf8");
-    const body = stripLeadingHeader(existing).trimStart();
-    await fs.writeFile(absolutePath, `${renderHeader(headerMeta)}${body}`, "utf8");
-  }
-
   const docsText = renderSchemaDocs(headerMeta, resources);
   await fs.writeFile(path.join(root, docsPath), docsText, "utf8");
 
@@ -280,16 +269,6 @@ async function main() {
       generatedAt,
     },
     artifacts: [
-      {
-        kind: "meta-schema",
-        path: "schema/self-describing-schema.tql",
-        sha256: await sha256File(path.join(root, "schema/self-describing-schema.tql")),
-      },
-      {
-        kind: "provenance-schema",
-        path: "schema/package-provenance.tql",
-        sha256: await sha256File(path.join(root, "schema/package-provenance.tql")),
-      },
       {
         kind: "documentation",
         path: docsPath,

@@ -1,7 +1,7 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-trace-to-knowledge
 # upstream-tag: v1.0.0
-# upstream-commit: 8e485bc511322b92bfb69e27c92fca457b232d84
+# upstream-commit: 6dc93a5f70d421ad14ba5572b8e383efd78f3b3e
 # source-artifacts:
 # - package.json
 # - schema/traceToKnowledge.tql
@@ -17,16 +17,6 @@ $module isa SchemaModule,
   has moduleKind "hand-authored-package";
 
 $r1 isa SchemaResource,
-  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#memoryKey",
-  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#memoryKey",
-  has typeLabel "memoryKey",
-  has kind "attribute",
-  has prefLabel "memoryKey",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
-(resource: $r1, module: $module) isa inModule;
-
-$r2 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#shodhMemoryId",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#shodhMemoryId",
   has typeLabel "shodhMemoryId",
@@ -34,59 +24,9 @@ $r2 isa SchemaResource,
   has prefLabel "shodhMemoryId",
   has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "value type: string";
-(resource: $r2, module: $module) isa inModule;
+(resource: $r1, module: $module) isa inModule;
 
-$r3 isa SchemaResource,
-  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#title",
-  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#title",
-  has typeLabel "title",
-  has kind "attribute",
-  has prefLabel "title",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
-(resource: $r3, module: $module) isa inModule;
-
-$r4 isa SchemaResource,
-  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#summary",
-  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#summary",
-  has typeLabel "summary",
-  has kind "attribute",
-  has prefLabel "summary",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
-(resource: $r4, module: $module) isa inModule;
-
-$r5 isa SchemaResource,
-  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#details",
-  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#details",
-  has typeLabel "details",
-  has kind "attribute",
-  has prefLabel "details",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
-(resource: $r5, module: $module) isa inModule;
-
-$r6 isa SchemaResource,
-  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#createdAt",
-  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#createdAt",
-  has typeLabel "createdAt",
-  has kind "attribute",
-  has prefLabel "createdAt",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: datetime";
-(resource: $r6, module: $module) isa inModule;
-
-$r7 isa SchemaResource,
-  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#updatedAt",
-  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#updatedAt",
-  has typeLabel "updatedAt",
-  has kind "attribute",
-  has prefLabel "updatedAt",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: datetime";
-(resource: $r7, module: $module) isa inModule;
-
-$r8 isa SchemaResource,
+$r2 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#confidence",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#confidence",
   has typeLabel "confidence",
@@ -94,9 +34,9 @@ $r8 isa SchemaResource,
   has prefLabel "confidence",
   has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "value type: double";
-(resource: $r8, module: $module) isa inModule;
+(resource: $r2, module: $module) isa inModule;
 
-$r9 isa SchemaResource,
+$r3 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#verified",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#verified",
   has typeLabel "verified",
@@ -104,29 +44,19 @@ $r9 isa SchemaResource,
   has prefLabel "verified",
   has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "value type: boolean";
-(resource: $r9, module: $module) isa inModule;
+(resource: $r3, module: $module) isa inModule;
 
-$r10 isa SchemaResource,
-  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#deprecated",
-  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#deprecated",
-  has typeLabel "deprecated",
-  has kind "attribute",
-  has prefLabel "deprecated",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: boolean";
-(resource: $r10, module: $module) isa inModule;
-
-$r11 isa SchemaResource,
+$r4 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#signatureText",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#signatureText",
   has typeLabel "signatureText",
   has kind "attribute",
   has prefLabel "signatureText",
-  has definition "Retrieval hooks / indexing", 
+  has definition "Signatures / indexing", 
   has scopeNote "value type: string";
-(resource: $r11, module: $module) isa inModule;
+(resource: $r4, module: $module) isa inModule;
 
-$r12 isa SchemaResource,
+$r5 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#signalKind",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#signalKind",
   has typeLabel "signalKind",
@@ -134,19 +64,19 @@ $r12 isa SchemaResource,
   has prefLabel "signalKind",
   has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "value type: string";
-(resource: $r12, module: $module) isa inModule;
+(resource: $r5, module: $module) isa inModule;
 
-$r13 isa SchemaResource,
+$r6 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#languageName",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#languageName",
   has typeLabel "languageName",
   has kind "attribute",
   has prefLabel "languageName",
-  has definition "Optional scope tuple fields", 
+  has definition "Scope tuple fields", 
   has scopeNote "value type: string";
-(resource: $r13, module: $module) isa inModule;
+(resource: $r6, module: $module) isa inModule;
 
-$r14 isa SchemaResource,
+$r7 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#toolName",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#toolName",
   has typeLabel "toolName",
@@ -154,9 +84,9 @@ $r14 isa SchemaResource,
   has prefLabel "toolName",
   has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "value type: string";
-(resource: $r14, module: $module) isa inModule;
+(resource: $r7, module: $module) isa inModule;
 
-$r15 isa SchemaResource,
+$r8 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#packageName",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#packageName",
   has typeLabel "packageName",
@@ -164,9 +94,9 @@ $r15 isa SchemaResource,
   has prefLabel "packageName",
   has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "value type: string";
-(resource: $r15, module: $module) isa inModule;
+(resource: $r8, module: $module) isa inModule;
 
-$r16 isa SchemaResource,
+$r9 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#packageVersion",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#packageVersion",
   has typeLabel "packageVersion",
@@ -174,9 +104,9 @@ $r16 isa SchemaResource,
   has prefLabel "packageVersion",
   has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "value type: string";
-(resource: $r16, module: $module) isa inModule;
+(resource: $r9, module: $module) isa inModule;
 
-$r17 isa SchemaResource,
+$r10 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#filePath",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#filePath",
   has typeLabel "filePath",
@@ -184,9 +114,9 @@ $r17 isa SchemaResource,
   has prefLabel "filePath",
   has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "value type: string";
-(resource: $r17, module: $module) isa inModule;
+(resource: $r10, module: $module) isa inModule;
 
-$r18 isa SchemaResource,
+$r11 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#symbolName",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#symbolName",
   has typeLabel "symbolName",
@@ -194,58 +124,28 @@ $r18 isa SchemaResource,
   has prefLabel "symbolName",
   has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "value type: string";
-(resource: $r18, module: $module) isa inModule;
+(resource: $r11, module: $module) isa inModule;
 
-$r19 isa SchemaResource,
-  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#tagText",
-  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#tagText",
-  has typeLabel "tagText",
-  has kind "attribute",
-  has prefLabel "tagText",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
-(resource: $r19, module: $module) isa inModule;
-
-$r20 isa SchemaResource,
-  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#externalSystem",
-  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#externalSystem",
-  has typeLabel "externalSystem",
-  has kind "attribute",
-  has prefLabel "externalSystem",
-  has definition "External evidence pointer", 
-  has scopeNote "value type: string";
-(resource: $r20, module: $module) isa inModule;
-
-$r21 isa SchemaResource,
-  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#externalRef",
-  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#externalRef",
-  has typeLabel "externalRef",
-  has kind "attribute",
-  has prefLabel "externalRef",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
-  has scopeNote "value type: string";
-(resource: $r21, module: $module) isa inModule;
-
-$r22 isa SchemaResource,
+$r12 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#payloadJson",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#payloadJson",
   has typeLabel "payloadJson",
   has kind "attribute",
   has prefLabel "payloadJson",
-  has definition "Auto-generated attribute extracted from the Trace-to-Knowledge schema.", 
+  has definition "Optional raw blob for external payloads", 
   has scopeNote "value type: string";
-(resource: $r22, module: $module) isa inModule;
+(resource: $r12, module: $module) isa inModule;
 
-$r23 isa SchemaResource,
+$r13 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#KnowledgeItem",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#KnowledgeItem",
   has typeLabel "KnowledgeItem",
   has kind "entity",
   has prefLabel "KnowledgeItem",
   has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
-(resource: $r23, module: $module) isa inModule;
+(resource: $r13, module: $module) isa inModule;
 
-$r24 isa SchemaResource,
+$r14 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#FailurePattern",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#FailurePattern",
   has typeLabel "FailurePattern",
@@ -253,9 +153,9 @@ $r24 isa SchemaResource,
   has prefLabel "FailurePattern",
   has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "subtype of KnowledgeItem";
-(resource: $r24, module: $module) isa inModule;
+(resource: $r14, module: $module) isa inModule;
 
-$r25 isa SchemaResource,
+$r15 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#FixPattern",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#FixPattern",
   has typeLabel "FixPattern",
@@ -263,9 +163,9 @@ $r25 isa SchemaResource,
   has prefLabel "FixPattern",
   has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "subtype of KnowledgeItem";
-(resource: $r25, module: $module) isa inModule;
+(resource: $r15, module: $module) isa inModule;
 
-$r26 isa SchemaResource,
+$r16 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#Procedure",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#Procedure",
   has typeLabel "Procedure",
@@ -273,9 +173,9 @@ $r26 isa SchemaResource,
   has prefLabel "Procedure",
   has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "subtype of KnowledgeItem";
-(resource: $r26, module: $module) isa inModule;
+(resource: $r16, module: $module) isa inModule;
 
-$r27 isa SchemaResource,
+$r17 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#Heuristic",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#Heuristic",
   has typeLabel "Heuristic",
@@ -283,157 +183,157 @@ $r27 isa SchemaResource,
   has prefLabel "Heuristic",
   has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.", 
   has scopeNote "subtype of KnowledgeItem";
-(resource: $r27, module: $module) isa inModule;
+(resource: $r17, module: $module) isa inModule;
 
-$r28 isa SchemaResource,
+$r18 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#Signature",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#Signature",
   has typeLabel "Signature",
   has kind "entity",
   has prefLabel "Signature",
   has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
-(resource: $r28, module: $module) isa inModule;
+(resource: $r18, module: $module) isa inModule;
 
-$r29 isa SchemaResource,
+$r19 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#Scope",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#Scope",
   has typeLabel "Scope",
   has kind "entity",
   has prefLabel "Scope",
   has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
-(resource: $r29, module: $module) isa inModule;
+(resource: $r19, module: $module) isa inModule;
 
-$r30 isa SchemaResource,
+$r20 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#EvidenceItem",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#EvidenceItem",
   has typeLabel "EvidenceItem",
   has kind "entity",
   has prefLabel "EvidenceItem",
   has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
-(resource: $r30, module: $module) isa inModule;
+(resource: $r20, module: $module) isa inModule;
 
-$r31 isa SchemaResource,
+$r21 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#ExternalEvidence",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#ExternalEvidence",
   has typeLabel "ExternalEvidence",
   has kind "entity",
   has prefLabel "ExternalEvidence",
   has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
-(resource: $r31, module: $module) isa inModule;
+(resource: $r21, module: $module) isa inModule;
 
-$r32 isa SchemaResource,
+$r22 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#Run",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#Run",
   has typeLabel "Run",
   has kind "entity",
   has prefLabel "Run",
   has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
-(resource: $r32, module: $module) isa inModule;
+(resource: $r22, module: $module) isa inModule;
 
-$r33 isa SchemaResource,
-  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#MemoryTag",
-  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#MemoryTag",
-  has typeLabel "MemoryTag",
+$r23 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#Tag",
+  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#Tag",
+  has typeLabel "Tag",
   has kind "entity",
-  has prefLabel "MemoryTag",
+  has prefLabel "Tag",
   has definition "Auto-generated entity extracted from the Trace-to-Knowledge schema.";
-(resource: $r33, module: $module) isa inModule;
+(resource: $r23, module: $module) isa inModule;
 
-$r34 isa SchemaResource,
+$r24 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#resolves",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#resolves",
   has typeLabel "resolves",
   has kind "relation",
   has prefLabel "resolves",
   has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
-(resource: $r34, module: $module) isa inModule;
+(resource: $r24, module: $module) isa inModule;
 
-$r35 isa SchemaResource,
+$r25 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#signatureLink",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#signatureLink",
   has typeLabel "signatureLink",
   has kind "relation",
   has prefLabel "signatureLink",
   has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
-(resource: $r35, module: $module) isa inModule;
+(resource: $r25, module: $module) isa inModule;
 
-$r36 isa SchemaResource,
+$r26 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#prerequisiteOf",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#prerequisiteOf",
   has typeLabel "prerequisiteOf",
   has kind "relation",
   has prefLabel "prerequisiteOf",
   has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
-(resource: $r36, module: $module) isa inModule;
+(resource: $r26, module: $module) isa inModule;
 
-$r37 isa SchemaResource,
+$r27 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#supersedes",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#supersedes",
   has typeLabel "supersedes",
   has kind "relation",
   has prefLabel "supersedes",
   has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
-(resource: $r37, module: $module) isa inModule;
+(resource: $r27, module: $module) isa inModule;
 
-$r38 isa SchemaResource,
+$r28 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#contradicts",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#contradicts",
   has typeLabel "contradicts",
   has kind "relation",
   has prefLabel "contradicts",
   has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
-(resource: $r38, module: $module) isa inModule;
+(resource: $r28, module: $module) isa inModule;
 
-$r39 isa SchemaResource,
+$r29 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#supportedBy",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#supportedBy",
   has typeLabel "supportedBy",
   has kind "relation",
   has prefLabel "supportedBy",
   has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
-(resource: $r39, module: $module) isa inModule;
+(resource: $r29, module: $module) isa inModule;
 
-$r40 isa SchemaResource,
+$r30 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#observedIn",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#observedIn",
   has typeLabel "observedIn",
   has kind "relation",
   has prefLabel "observedIn",
   has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
-(resource: $r40, module: $module) isa inModule;
+(resource: $r30, module: $module) isa inModule;
 
-$r41 isa SchemaResource,
+$r31 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#extractedFrom",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#extractedFrom",
   has typeLabel "extractedFrom",
   has kind "relation",
   has prefLabel "extractedFrom",
   has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
-(resource: $r41, module: $module) isa inModule;
+(resource: $r31, module: $module) isa inModule;
 
-$r42 isa SchemaResource,
+$r32 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#appliesTo",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#appliesTo",
   has typeLabel "appliesTo",
   has kind "relation",
   has prefLabel "appliesTo",
   has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
-(resource: $r42, module: $module) isa inModule;
+(resource: $r32, module: $module) isa inModule;
 
-$r43 isa SchemaResource,
+$r33 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#hasMemoryTag",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#hasMemoryTag",
   has typeLabel "hasMemoryTag",
   has kind "relation",
   has prefLabel "hasMemoryTag",
-  has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
-(resource: $r43, module: $module) isa inModule;
+  has definition "Reuse existing Tag with a domain-specific relation";
+(resource: $r33, module: $module) isa inModule;
 
-$r44 isa SchemaResource,
+$r34 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#evidenceRef",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#evidenceRef",
   has typeLabel "evidenceRef",
   has kind "relation",
   has prefLabel "evidenceRef",
   has definition "Auto-generated relation extracted from the Trace-to-Knowledge schema.";
-(resource: $r44, module: $module) isa inModule;
+(resource: $r34, module: $module) isa inModule;

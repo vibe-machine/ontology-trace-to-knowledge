@@ -1,31 +1,24 @@
 # Trace-to-Knowledge schema
 # Purpose: high-signal ontology for converting raw trace into distilled knowledge.
+# Depends on ontology-gist and extends its shared types and attributes.
 
 define
 
 # ------------------------------
 # Attributes
+# Keep only what’s not already modeled
 # ------------------------------
 
-attribute memoryKey, value string;
 attribute shodhMemoryId, value string;
-
-attribute title, value string;
-attribute summary, value string;
-attribute details, value string;
-
-attribute createdAt, value datetime;
-attribute updatedAt, value datetime;
 
 attribute confidence, value double;
 attribute verified, value boolean;
-attribute deprecated, value boolean;
 
-# Retrieval hooks / indexing
+# Signatures / indexing
 attribute signatureText, value string;
 attribute signalKind, value string;
 
-# Optional scope tuple fields
+# Scope tuple fields
 attribute languageName, value string;
 attribute toolName, value string;
 attribute packageName, value string;
@@ -33,28 +26,28 @@ attribute packageVersion, value string;
 attribute filePath, value string;
 attribute symbolName, value string;
 
-attribute tagText, value string;
-
-# External evidence pointer
-attribute externalSystem, value string;
-attribute externalRef, value string;
+# Optional raw blob for external payloads
 attribute payloadJson, value string;
 
 # ------------------------------
 # Core knowledge types
+# - Switch to existing identifier mechanism: ID + isIdentifiedBy
+# - Reuse existing text fields: name/description, plus optional sourceIRI/uniqueText
 # ------------------------------
 
 entity KnowledgeItem,
-  owns memoryKey @key,
+  sub ContentExpression,
   owns shodhMemoryId @card(0..1),
-  owns title,
-  owns summary,
-  owns details,
+  owns name,
+  owns description,
+  owns uniqueText,
+  owns sourceIRI,
   owns confidence,
   owns verified @card(0..1),
   owns deprecated @card(0..1),
-  owns createdAt,
-  owns updatedAt,
+
+  plays isIdentifiedBy:isIdentifiedBySubject,
+
   plays resolves:failure,
   plays resolves:fix,
   plays prerequisiteOf:dependent,
@@ -75,64 +68,75 @@ entity Procedure sub KnowledgeItem;
 entity Heuristic sub KnowledgeItem;
 
 # ------------------------------
-# Signatures
+# Signatures (free-text kind)
 # ------------------------------
 
 entity Signature,
-  owns memoryKey @key,
+  sub ContentExpression,
   owns signatureText,
   owns signalKind,
+  owns uniqueText,
+  plays isIdentifiedBy:isIdentifiedBySubject,
   plays signatureLink:signature;
 
 # ------------------------------
-# Scope
+# Scope (atomic tuple instances)
 # ------------------------------
 
 entity Scope,
-  owns memoryKey @key,
+  sub Thing,
   owns languageName @card(0..1),
   owns toolName @card(0..1),
   owns packageName @card(0..1),
   owns packageVersion @card(0..1),
   owns filePath @card(0..1),
   owns symbolName @card(0..1),
+  owns uniqueText,
+  plays isIdentifiedBy:isIdentifiedBySubject,
   plays appliesTo:scope;
 
 # ------------------------------
-# Evidence
+# Evidence (integratable)
+# Use existing sourceIRI/idText for external pointers; keep payloadJson if needed.
 # ------------------------------
 
 entity EvidenceItem,
-  owns memoryKey @key,
-  owns details,
-  owns createdAt,
+  sub ContentExpression,
+  owns description,
+  owns sourceIRI,
+  owns idText,
+  owns payloadJson @card(0..1),
+  owns uniqueText,
+  plays isIdentifiedBy:isIdentifiedBySubject,
   plays supportedBy:evidence,
   plays extractedFrom:evidence,
   plays observedIn:evidence,
   plays evidenceRef:evidence;
 
 entity ExternalEvidence,
-  owns memoryKey @key,
-  owns externalSystem,
-  owns externalRef,
+  sub ContentExpression,
+  owns sourceIRI,
+  owns idText,
   owns payloadJson @card(0..1),
+  owns uniqueText,
+  plays isIdentifiedBy:isIdentifiedBySubject,
   plays evidenceRef:external;
 
 entity Run,
-  owns memoryKey @key,
-  owns createdAt,
-  owns updatedAt,
+  sub TemporalRelation,
   owns toolName @card(0..1),
   owns languageName @card(0..1),
+  owns uniqueText,
+  plays isIdentifiedBy:isIdentifiedBySubject,
   plays observedIn:run,
   plays extractedFrom:run;
 
 # ------------------------------
-# Tagging
+# Tagging: reuse existing Tag
+# (use Tag.uniqueText as the tag value/key)
 # ------------------------------
 
-entity MemoryTag,
-  owns tagText @key,
+entity Tag,
   plays hasMemoryTag:tag;
 
 # ------------------------------
@@ -181,6 +185,7 @@ relation appliesTo,
   relates scope,
   owns confidence;
 
+# Reuse existing Tag with a domain-specific relation
 relation hasMemoryTag,
   relates tagged,
   relates tag;

@@ -7,42 +7,32 @@
   "upstream": {
     "repoUrl": "https://github.com/vibe-machine/ontology-trace-to-knowledge",
     "tag": "v1.0.0",
-    "commit": "8e485bc511322b92bfb69e27c92fca457b232d84",
+    "commit": "6dc93a5f70d421ad14ba5572b8e383efd78f3b3e",
     "sourceArtifacts": [
       {
         "path": "package.json",
-        "sha256": "847a16c81636364dbfe055e03ac34bdee69d3dd537b73da17b20a409097ba388"
+        "sha256": "372cab5109e807a60c06ae8f1eb5780890e0921708a595ee47f4011be805b61d"
       },
       {
         "path": "schema/traceToKnowledge.tql",
-        "sha256": "997f65db9839d75bb083783c20c949058e9120d356aa579236e38714db8dd0f7"
+        "sha256": "3a264aa23dde48c839ca758a587b2047a951e153491cf08a0de081e16f1b796a"
       },
       {
         "path": "tools/package_contract/refresh_package_contract.mjs",
-        "sha256": "7308d2d6ec033c831e560f8521958c468f1bb38a5f8f3342f3190c3bccb2e33a"
+        "sha256": "95446186e81d62ae7f061dfe08f1f1e5a27683ebd7800f4946ad0d2ac8060cb5"
       }
     ]
   },
   "generator": {
     "name": "trace-to-knowledge-package-refresh",
     "version": "0.1.0",
-    "generatedAt": "2026-03-08T03:44:53.349Z"
+    "generatedAt": "2026-03-08T04:59:24.704Z"
   },
   "artifacts": [
     {
-      "kind": "meta-schema",
-      "path": "schema/self-describing-schema.tql",
-      "sha256": "27b979a7ce9ba17ab97247ad2480b971c4b54e146ed0a6f1f3adae127ea35bee"
-    },
-    {
-      "kind": "provenance-schema",
-      "path": "schema/package-provenance.tql",
-      "sha256": "1aae26132ec31dc8ac6d30ed1b6e8790ca56f65380886efa75b86d1ef188b8ca"
-    },
-    {
       "kind": "documentation",
       "path": "data/trace-to-knowledge-schema-docs.tql",
-      "sha256": "c333307d5a60624403d1ed8cdd5f10381a3d168b31451c7b6e99f2947656c42e"
+      "sha256": "3e26293589ba8db9d4bda5a910802abd6c938878a7c80f24cdf7a7640151a1e4"
     },
     {
       "kind": "manifest-schema",
@@ -52,7 +42,7 @@
     {
       "kind": "provenance-seeds",
       "path": "data/trace-to-knowledge-provenance.tql",
-      "sha256": "facf42aa98ffbeb05e2379de16e425032660bb492e8944b125328c52e2c74918"
+      "sha256": "0267a690e75e9487202b5115f14d33329116df4f8d25a1d27564d662041c410c"
     }
   ]
 }
