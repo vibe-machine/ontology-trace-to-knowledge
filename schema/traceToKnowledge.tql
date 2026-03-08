@@ -1,0 +1,190 @@
+# Trace-to-Knowledge schema
+# Purpose: high-signal ontology for converting raw trace into distilled knowledge.
+
+define
+
+# ------------------------------
+# Attributes
+# ------------------------------
+
+attribute memoryKey, value string;
+attribute shodhMemoryId, value string;
+
+attribute title, value string;
+attribute summary, value string;
+attribute details, value string;
+
+attribute createdAt, value datetime;
+attribute updatedAt, value datetime;
+
+attribute confidence, value double;
+attribute verified, value boolean;
+attribute deprecated, value boolean;
+
+# Retrieval hooks / indexing
+attribute signatureText, value string;
+attribute signalKind, value string;
+
+# Optional scope tuple fields
+attribute languageName, value string;
+attribute toolName, value string;
+attribute packageName, value string;
+attribute packageVersion, value string;
+attribute filePath, value string;
+attribute symbolName, value string;
+
+attribute tagText, value string;
+
+# External evidence pointer
+attribute externalSystem, value string;
+attribute externalRef, value string;
+attribute payloadJson, value string;
+
+# ------------------------------
+# Core knowledge types
+# ------------------------------
+
+entity KnowledgeItem,
+  owns memoryKey @key,
+  owns shodhMemoryId @card(0..1),
+  owns title,
+  owns summary,
+  owns details,
+  owns confidence,
+  owns verified @card(0..1),
+  owns deprecated @card(0..1),
+  owns createdAt,
+  owns updatedAt,
+  plays resolves:failure,
+  plays resolves:fix,
+  plays prerequisiteOf:dependent,
+  plays prerequisiteOf:prerequisite,
+  plays contradicts:left,
+  plays contradicts:right,
+  plays supersedes:newer,
+  plays supersedes:older,
+  plays supportedBy:claim,
+  plays extractedFrom:knowledge,
+  plays appliesTo:knowledge,
+  plays signatureLink:knowledge,
+  plays hasMemoryTag:tagged;
+
+entity FailurePattern sub KnowledgeItem;
+entity FixPattern sub KnowledgeItem;
+entity Procedure sub KnowledgeItem;
+entity Heuristic sub KnowledgeItem;
+
+# ------------------------------
+# Signatures
+# ------------------------------
+
+entity Signature,
+  owns memoryKey @key,
+  owns signatureText,
+  owns signalKind,
+  plays signatureLink:signature;
+
+# ------------------------------
+# Scope
+# ------------------------------
+
+entity Scope,
+  owns memoryKey @key,
+  owns languageName @card(0..1),
+  owns toolName @card(0..1),
+  owns packageName @card(0..1),
+  owns packageVersion @card(0..1),
+  owns filePath @card(0..1),
+  owns symbolName @card(0..1),
+  plays appliesTo:scope;
+
+# ------------------------------
+# Evidence
+# ------------------------------
+
+entity EvidenceItem,
+  owns memoryKey @key,
+  owns details,
+  owns createdAt,
+  plays supportedBy:evidence,
+  plays extractedFrom:evidence,
+  plays observedIn:evidence,
+  plays evidenceRef:evidence;
+
+entity ExternalEvidence,
+  owns memoryKey @key,
+  owns externalSystem,
+  owns externalRef,
+  owns payloadJson @card(0..1),
+  plays evidenceRef:external;
+
+entity Run,
+  owns memoryKey @key,
+  owns createdAt,
+  owns updatedAt,
+  owns toolName @card(0..1),
+  owns languageName @card(0..1),
+  plays observedIn:run,
+  plays extractedFrom:run;
+
+# ------------------------------
+# Tagging
+# ------------------------------
+
+entity MemoryTag,
+  owns tagText @key,
+  plays hasMemoryTag:tag;
+
+# ------------------------------
+# Relations
+# ------------------------------
+
+relation resolves,
+  relates failure,
+  relates fix,
+  owns confidence;
+
+relation signatureLink,
+  relates knowledge,
+  relates signature,
+  owns confidence;
+
+relation prerequisiteOf,
+  relates dependent,
+  relates prerequisite;
+
+relation supersedes,
+  relates newer,
+  relates older;
+
+relation contradicts,
+  relates left,
+  relates right;
+
+relation supportedBy,
+  relates claim,
+  relates evidence,
+  owns confidence;
+
+relation observedIn,
+  relates evidence,
+  relates run;
+
+relation extractedFrom,
+  relates knowledge,
+  relates evidence,
+  relates run,
+  owns confidence;
+
+relation appliesTo,
+  relates knowledge,
+  relates scope,
+  owns confidence;
+
+relation hasMemoryTag,
+  relates tagged,
+  relates tag;
+
+relation evidenceRef,
+  relates evidence,
+  relates external;

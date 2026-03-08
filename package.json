@@ -1,0 +1,58 @@
+{
+  "name": "trace-to-knowledge",
+  "displayName": "Trace-to-Knowledge",
+  "version": "1.0.0",
+  "description": "Trace-to-Knowledge (T2K): high-signal ontology for distilling raw traces into reusable knowledge.",
+  "author": "vibe-machine",
+  "license": "MIT",
+  "source": "https://github.com/vibe-machine/ontology-trace-to-knowledge",
+  "prefix": "t2k",
+  "schemas": [
+    {
+      "name": "self-describing-schema",
+      "file": "schema/self-describing-schema.tql"
+    },
+    {
+      "name": "package-provenance",
+      "file": "schema/package-provenance.tql"
+    },
+    {
+      "name": "traceToKnowledge",
+      "file": "schema/traceToKnowledge.tql"
+    }
+  ],
+  "data": [
+    "data/trace-to-knowledge-provenance.tql",
+    "data/trace-to-knowledge-schema-docs.tql"
+  ],
+  "scripts": {
+    "refresh:package-contract": "node tools/package_contract/refresh_package_contract.mjs",
+    "validate:bootstrap": "node tools/package_contract/validate_bootstrap.mjs",
+    "test:typedb-bootstrap": "node tools/package_contract/validate_typedb_bootstrap.mjs",
+    "test": "npm run validate:bootstrap && npm run test:typedb-bootstrap"
+  },
+  "manifests": [
+    "manifests/trace-to-knowledge-v1.0.0.package-manifest.json"
+  ],
+  "assembly": {
+    "loadOrder": [
+      "schema/self-describing-schema.tql",
+      "schema/package-provenance.tql",
+      "schema/traceToKnowledge.tql",
+      "data/trace-to-knowledge-provenance.tql",
+      "data/trace-to-knowledge-schema-docs.tql"
+    ],
+    "generatedArtifacts": [
+      "schema/self-describing-schema.tql",
+      "schema/package-provenance.tql",
+      "data/trace-to-knowledge-schema-docs.tql",
+      "data/trace-to-knowledge-provenance.tql",
+      "manifests/package-manifest.schema.json",
+      "manifests/trace-to-knowledge-v1.0.0.package-manifest.json"
+    ]
+  },
+  "provenance": {
+    "manifest": "manifests/trace-to-knowledge-v1.0.0.package-manifest.json",
+    "status": "bootstrap"
+  }
+}
