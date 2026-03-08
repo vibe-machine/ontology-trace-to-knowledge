@@ -27,7 +27,9 @@
     "refresh:package-contract": "node tools/package_contract/refresh_package_contract.mjs",
     "validate:bootstrap": "node tools/package_contract/validate_bootstrap.mjs",
     "test:typedb-bootstrap": "node tools/package_contract/validate_typedb_bootstrap.mjs",
-    "test": "npm run validate:bootstrap && npm run test:typedb-bootstrap"
+    "test": "npm run validate:bootstrap && npm run test:typedb-bootstrap",
+    "release": "../ontology-tooling/bin/ontology-release --repo .",
+    "release:check": "../ontology-tooling/bin/ontology-release --repo . --validate-only"
   },
   "manifests": [
     "manifests/trace-to-knowledge-v1.0.1.package-manifest.json"

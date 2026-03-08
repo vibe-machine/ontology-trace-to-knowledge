@@ -1,7 +1,7 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-trace-to-knowledge
 # upstream-tag: v1.0.1
-# upstream-commit: 382e6bd97618db0fe177e595a6abbbbbb8581899
+# upstream-commit: 069ec423819b81ffdbc05bf050e8e57661fbe154
 # source-artifacts:
 # - package.json
 # - schema/traceToKnowledge.tql

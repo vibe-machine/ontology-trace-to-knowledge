@@ -1,7 +1,7 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-trace-to-knowledge
 # upstream-tag: v1.0.1
-# upstream-commit: 382e6bd97618db0fe177e595a6abbbbbb8581899
+# upstream-commit: 069ec423819b81ffdbc05bf050e8e57661fbe154
 # source-artifacts:
 # - package.json
 # - schema/traceToKnowledge.tql
@@ -13,20 +13,20 @@
 insert
 
 $build isa OntologyPackageBuild,
-  has buildKey "trace-to-knowledge@1.0.1:382e6bd97618db0fe177e595a6abbbbbb8581899",
+  has buildKey "trace-to-knowledge@1.0.1:069ec423819b81ffdbc05bf050e8e57661fbe154",
   has packageName "trace-to-knowledge",
   has packageVersion "1.0.1",
   has upstreamRepoUrl "https://github.com/vibe-machine/ontology-trace-to-knowledge",
   has upstreamTag "v1.0.1",
-  has upstreamCommit "382e6bd97618db0fe177e595a6abbbbbb8581899",
+  has upstreamCommit "069ec423819b81ffdbc05bf050e8e57661fbe154",
   has manifestPath "manifests/trace-to-knowledge-v1.0.1.package-manifest.json",
   has generatorName "trace-to-knowledge-package-refresh",
   has generatorVersion "0.1.0",
-  has generatedAt "2026-03-08T05:17:05.433Z";
+  has generatedAt "2026-03-08T15:44:22.330Z";
 
 $s1 isa SourceArtifactRecord,
   has sourcePath "package.json",
-  has sourceSha256 "bd42f9ff1f548405c8eb82374049919eca5c3e5c13c17d3b7d4431be6354ba47";
+  has sourceSha256 "eacf59caa2a9f2b504590c64f90c850ffc88110575ce54da0e4bdef5ea9693ab";
 (build: $build, sourceArtifact: $s1) isa buildHasSourceArtifact;
 
 $s2 isa SourceArtifactRecord,
@@ -47,7 +47,7 @@ $s4 isa SourceArtifactRecord,
 $g1 isa GeneratedArtifactRecord,
   has artifactPath "data/trace-to-knowledge-schema-docs.tql",
   has artifactKind "documentation",
-  has artifactSha256 "9ba6cb70fd1b47f49436127bdb048bc6aaf0747cc1a3826cbb8dbf923dab6501";
+  has artifactSha256 "0892b1d03a769cbcda476e610b9f655c36995999413b07a119fee06e38152c89";
 (build: $build, generatedArtifact: $g1) isa buildHasGeneratedArtifact;
 
 $g2 isa GeneratedArtifactRecord,
