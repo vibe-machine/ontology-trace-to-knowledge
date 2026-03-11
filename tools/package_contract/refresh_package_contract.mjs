@@ -134,9 +134,7 @@ function buildScopeNote(resource) {
 function renderSchemaDocs(meta, resources, docsConfig) {
   const lines = [
     renderHeader(meta),
-    "insert",
-    "",
-    "$module isa SchemaModule,",
+    "put $module isa SchemaModule,",
     `  has moduleKey "${escapeTypeQL(meta.packageName)}",`,
     `  has moduleName "${escapeTypeQL(docsConfig.module?.moduleName ?? meta.moduleName)}",`,
     `  has moduleKind "${escapeTypeQL(docsConfig.module?.moduleKind ?? meta.moduleKind)}";`,
@@ -151,7 +149,7 @@ function renderSchemaDocs(meta, resources, docsConfig) {
     const scopeNote = override.scopeNote ?? buildScopeNote(resource);
     const example = override.example ?? null;
     const editorialNote = override.editorialNote ?? null;
-    lines.push(`${variable} isa SchemaResource,`);
+    lines.push(`put ${variable} isa SchemaResource,`);
     lines.push(`  has docKey "${escapeTypeQL(docKey)}",`);
     lines.push(`  has iri "${escapeTypeQL(docKey)}",`);
     lines.push(`  has typeLabel "${escapeTypeQL(resource.typeLabel)}",`);
@@ -166,7 +164,7 @@ function renderSchemaDocs(meta, resources, docsConfig) {
       const suffix = propertyIndex === extraProperties.length - 1 ? ";" : ",";
       lines.push(`${propertyLine}${suffix}`);
     });
-    lines.push(`(resource: ${variable}, module: $module) isa inModule;`);
+    lines.push(`put (resource: ${variable}, module: $module) isa inModule;`);
     lines.push("");
   });
 
@@ -184,9 +182,7 @@ function renderProvenanceData(manifest, manifestPath, provenancePath) {
       manifestPath,
       generator: manifest.generator,
     }),
-    "insert",
-    "",
-    "$build isa OntologyPackageBuild,",
+    "put $build isa OntologyPackageBuild,",
     `  has buildKey "${escapeTypeQL(buildKey)}",`,
     `  has packageName "${escapeTypeQL(manifest.package.name)}",`,
     `  has packageVersion "${escapeTypeQL(manifest.package.version)}",`,
@@ -202,21 +198,21 @@ function renderProvenanceData(manifest, manifestPath, provenancePath) {
 
   manifest.upstream.sourceArtifacts.forEach((artifact, index) => {
     const variable = `$s${index + 1}`;
-    lines.push(`${variable} isa SourceArtifactRecord,`);
+    lines.push(`put ${variable} isa SourceArtifactRecord,`);
     lines.push(`  has sourcePath "${escapeTypeQL(artifact.path)}",`);
     lines.push(`  has sourceSha256 "${escapeTypeQL(artifact.sha256)}";`);
-    lines.push(`(build: $build, sourceArtifact: ${variable}) isa buildHasSourceArtifact;`);
+    lines.push(`put (build: $build, sourceArtifact: ${variable}) isa buildHasSourceArtifact;`);
     lines.push("");
   });
 
   const generatedArtifacts = manifest.artifacts.filter((artifact) => artifact.path !== provenancePath);
   generatedArtifacts.forEach((artifact, index) => {
     const variable = `$g${index + 1}`;
-    lines.push(`${variable} isa GeneratedArtifactRecord,`);
+    lines.push(`put ${variable} isa GeneratedArtifactRecord,`);
     lines.push(`  has artifactPath "${escapeTypeQL(artifact.path)}",`);
     lines.push(`  has artifactKind "${escapeTypeQL(artifact.kind)}",`);
     lines.push(`  has artifactSha256 "${escapeTypeQL(artifact.sha256)}";`);
-    lines.push(`(build: $build, generatedArtifact: ${variable}) isa buildHasGeneratedArtifact;`);
+    lines.push(`put (build: $build, generatedArtifact: ${variable}) isa buildHasGeneratedArtifact;`);
     lines.push("");
   });
 

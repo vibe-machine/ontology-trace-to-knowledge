@@ -73,7 +73,13 @@ async function writeMergedQueryFile(keyword, assets, outPath) {
     if (text) chunks.push(text);
   }
 
-  await fs.writeFile(outPath, `${keyword}\n\n${chunks.join("\n\n")}\n`, "utf8");
+  // If chunks contain put-prefixed statements, emit them directly
+  // (each put is a self-contained write statement, no insert wrapper needed)
+  const hasPut = chunks.some((chunk) => /^put /m.test(chunk));
+  const merged = hasPut
+    ? `${chunks.join("\n\n")}\n`
+    : `${keyword}\n\n${chunks.join("\n\n")}\n`;
+  await fs.writeFile(outPath, merged, "utf8");
 }
 
 async function getFreePort() {
@@ -193,19 +199,39 @@ async function main() {
 
   const typedbTemp = await fs.mkdtemp(path.join(os.tmpdir(), "ontology-package-bootstrap-"));
   const mergedSchema = path.join(typedbTemp, "merged-schema.tql");
-  const mergedData = path.join(typedbTemp, "merged-data.tql");
-  const loadScript = path.join(typedbTemp, "load-script.tql");
   const databaseName = `ontology_pkg_${process.pid}`;
 
   await writeMergedQueryFile("define", schemaAssets, mergedSchema);
-  await writeMergedQueryFile("insert", writeAssets, mergedData);
-  await fs.writeFile(loadScript, `database create-init ${databaseName} ${mergedSchema} ${mergedData}\n\nexit\n`, "utf8");
+
+  // Prepare individual data files with variable-prefix namespacing
+  const dataFiles = [];
+  for (const [index, asset] of writeAssets.entries()) {
+    const text = await fs.readFile(path.join(asset.packageRoot, asset.relativePath), "utf8");
+    const chunk = rewriteChunk(text, "insert", `write${index + 1}`);
+    if (chunk) {
+      const dataFile = path.join(typedbTemp, `data-${index + 1}.tql`);
+      await fs.writeFile(dataFile, `${chunk}\n`, "utf8");
+      dataFiles.push(dataFile);
+    }
+  }
 
   let typedbServer;
   try {
     typedbServer = await startTypedbServer(typedbTemp);
-    const load = runTypedbScript(typedbServer.typedb, typedbServer.grpcPort, loadScript, root);
-    assertCondition(load.status === 0, `TypeDB bootstrap failed:\n${load.stdout}\n${load.stderr}`);
+
+    // Step 1: Create database and load schema
+    const schemaScript = path.join(typedbTemp, "schema-script.tql");
+    await fs.writeFile(schemaScript, `database create ${databaseName}\n\ntransaction schema ${databaseName}\n\nsource ${mergedSchema}\n\ncommit\n\nexit\n`, "utf8");
+    const schemaResult = runTypedbScript(typedbServer.typedb, typedbServer.grpcPort, schemaScript, root);
+    assertCondition(schemaResult.status === 0, `TypeDB schema load failed:\n${schemaResult.stdout}\n${schemaResult.stderr}`);
+
+    // Step 2: Load each data file in its own write transaction
+    for (const dataFile of dataFiles) {
+      const loadScript = path.join(typedbTemp, `load-${path.basename(dataFile)}.tql`);
+      await fs.writeFile(loadScript, `transaction write ${databaseName}\n\nsource ${dataFile}\n\ncommit\n\nexit\n`, "utf8");
+      const load = runTypedbScript(typedbServer.typedb, typedbServer.grpcPort, loadScript, root);
+      assertCondition(load.status === 0, `TypeDB data load failed for ${path.basename(dataFile)}:\n${load.stdout}\n${load.stderr}`);
+    }
 
     for (const packageName of orderedNames) {
       const queryScript = path.join(typedbTemp, `query-${packageName}.tql`);

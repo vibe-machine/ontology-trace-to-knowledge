@@ -2,16 +2,16 @@
   "manifestVersion": "1.0.0",
   "package": {
     "name": "trace-to-knowledge",
-    "version": "1.0.4"
+    "version": "1.0.5"
   },
   "upstream": {
     "repoUrl": "https://github.com/vibe-machine/ontology-trace-to-knowledge",
-    "tag": "v1.0.4",
-    "commit": "6193193fe5791bc57c9c39ba1e0a53bc4a2827c5",
+    "tag": "v1.0.5",
+    "commit": "3092bc6034bb1fb62469b8fa7d395307dc9626e8",
     "sourceArtifacts": [
       {
         "path": "package.json",
-        "sha256": "e9de64955a924852de7d05c2ce51d0dbb9b84c36f68b3f2e3b69edeeee74b08a"
+        "sha256": "1f906727e5d2649210016cdfa8dde4fd27e8f4f7cc15bec1ec084d96127bc018"
       },
       {
         "path": "schema/traceToKnowledge.tql",
@@ -23,20 +23,20 @@
       },
       {
         "path": "tools/package_contract/refresh_package_contract.mjs",
-        "sha256": "2ecf880a21e89e19cd9d11b08edd14f57a33055a65a0b39de798b2501c6e7230"
+        "sha256": "a2b508f9e1c69946045b1542320c465496776b354990feb10979296d9632a438"
       }
     ]
   },
   "generator": {
     "name": "trace-to-knowledge-package-refresh",
     "version": "0.1.0",
-    "generatedAt": "2026-03-08T23:41:19.603Z"
+    "generatedAt": "2026-03-11T02:26:23.188Z"
   },
   "artifacts": [
     {
       "kind": "documentation",
       "path": "data/trace-to-knowledge-schema-docs.tql",
-      "sha256": "48015d8bf287c89c6d207f39d33f3544db0ae72143d20cc0cb25ab47215fe0bb"
+      "sha256": "5e0eb63ee0aa7c311d7ffd3ce63167eca38996a1da5f742313c2a5eaf582f37f"
     },
     {
       "kind": "manifest-schema",
@@ -46,7 +46,7 @@
     {
       "kind": "provenance-seeds",
       "path": "data/trace-to-knowledge-provenance.tql",
-      "sha256": "f107b8fae7328630d87f977b87f3e1eab61f5a7b0dfef80a7694d27b2a425f6b"
+      "sha256": "485986b1fc2d6005cd06452a112592619fe78ee52d7fed74612a3f8142214c18"
     }
   ]
 }
