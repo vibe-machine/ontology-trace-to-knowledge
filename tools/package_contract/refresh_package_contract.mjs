@@ -172,7 +172,7 @@ function renderSchemaDocs(meta, resources, docsConfig) {
 }
 
 function renderProvenanceData(manifest, manifestPath, provenancePath) {
-  const buildKey = `${manifest.package.name}@${manifest.package.version}:${manifest.upstream.commit}`;
+  const moduleVersionKey = `${manifest.upstream.repoUrl}@${manifest.package.version}`;
   const lines = [
     renderHeader({
       repoUrl: manifest.upstream.repoUrl,
@@ -182,17 +182,20 @@ function renderProvenanceData(manifest, manifestPath, provenancePath) {
       manifestPath,
       generator: manifest.generator,
     }),
-    "put $build isa OntologyPackageBuild,",
-    `  has buildKey "${escapeTypeQL(buildKey)}",`,
-    `  has packageName "${escapeTypeQL(manifest.package.name)}",`,
-    `  has packageVersion "${escapeTypeQL(manifest.package.version)}",`,
-    `  has upstreamRepoUrl "${escapeTypeQL(manifest.upstream.repoUrl)}",`,
-    `  has upstreamTag "${escapeTypeQL(manifest.upstream.tag)}",`,
+    "put $module isa OntologyModule,",
+    `  has moduleName "${escapeTypeQL(manifest.package.name)}",`,
+    `  has moduleRepoUrl "${escapeTypeQL(manifest.upstream.repoUrl)}";`,
+    "",
+    "put $version isa OntologyModuleVersion,",
+    `  has moduleVersionKey "${escapeTypeQL(moduleVersionKey)}",`,
+    `  has moduleVersion "${escapeTypeQL(manifest.package.version)}",`,
     `  has upstreamCommit "${escapeTypeQL(manifest.upstream.commit)}",`,
     `  has manifestPath "${escapeTypeQL(manifestPath)}",`,
     `  has generatorName "${escapeTypeQL(manifest.generator.name)}",`,
     `  has generatorVersion "${escapeTypeQL(manifest.generator.version)}",`,
     `  has generatedAt "${escapeTypeQL(manifest.generator.generatedAt)}";`,
+    "",
+    "put (version: $version, module: $module) isa ontologyModuleVersionOf;",
     "",
   ];
 
@@ -201,7 +204,7 @@ function renderProvenanceData(manifest, manifestPath, provenancePath) {
     lines.push(`put ${variable} isa SourceArtifactRecord,`);
     lines.push(`  has sourcePath "${escapeTypeQL(artifact.path)}",`);
     lines.push(`  has sourceSha256 "${escapeTypeQL(artifact.sha256)}";`);
-    lines.push(`put (build: $build, sourceArtifact: ${variable}) isa buildHasSourceArtifact;`);
+    lines.push(`put (version: $version, sourceArtifact: ${variable}) isa ontologyModuleVersionBasedOnSourceArtifact;`);
     lines.push("");
   });
 
@@ -212,7 +215,7 @@ function renderProvenanceData(manifest, manifestPath, provenancePath) {
     lines.push(`  has artifactPath "${escapeTypeQL(artifact.path)}",`);
     lines.push(`  has artifactKind "${escapeTypeQL(artifact.kind)}",`);
     lines.push(`  has artifactSha256 "${escapeTypeQL(artifact.sha256)}";`);
-    lines.push(`put (build: $build, generatedArtifact: ${variable}) isa buildHasGeneratedArtifact;`);
+    lines.push(`put (generatedArtifact: ${variable}, version: $version) isa generatedArtifactForOntologyModuleVersion;`);
     lines.push("");
   });
 

@@ -15,12 +15,12 @@ Current status:
 - `docs/translation/schema-model.md` is the human-oriented explanation of the T2K conceptual model.
 - `docs/translation/schema-docs.json` is the hand-authored documentation source used to generate queryable schema docs.
 - `data/trace-to-knowledge-schema-docs.tql` is generated from the schema and is the authoritative documentation path for package-local schema resources.
-- `data/trace-to-knowledge-provenance.tql` records the package build, source artifacts, and generated artifact checksums.
+- `data/trace-to-knowledge-provenance.tql` records the ontology module version, source artifacts, and generated artifact checksums.
 - `manifests/trace-to-knowledge-v1.0.1.package-manifest.json` is the filesystem source of truth for the package contract.
 - `tools/package_contract/refresh_package_contract.mjs` regenerates documentation and provenance artifacts from the current schema and package metadata.
 - `tools/package_contract/validate_bootstrap.mjs` validates the package contract and artifact hashes.
 - `tools/package_contract/validate_typedb_bootstrap.mjs` proves the package can load into TypeDB with its declared dependency closure.
-- Shared `SchemaModule` / `OntologyPackageBuild` types come from the `gist` dependency and are not vendored locally in this repo.
+- Shared `SchemaModule` / `OntologyModule` / `OntologyModuleVersion` types come from the `gist` dependency and are not vendored locally in this repo.
 
 Design references:
 
