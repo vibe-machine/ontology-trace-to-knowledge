@@ -1,3 +1,20 @@
+# Migration: ontology-trace-to-knowledge v2.0.0 -> v2.0.1
+# Generated for schema-doc structural metadata refresh
+# Apply in a write transaction against an existing database
+# manifest: manifests/trace-to-knowledge-v2.0.1.package-manifest.json
+
+match
+  $module isa SchemaModule, has moduleKey "trace-to-knowledge";
+  $link isa inModule (resource: $resource, module: $module);
+delete
+  $link;
+  $resource;
+
+match
+  $module isa SchemaModule, has moduleKey "trace-to-knowledge";
+delete
+  $module;
+
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-trace-to-knowledge
 # upstream-tag: v2.0.1

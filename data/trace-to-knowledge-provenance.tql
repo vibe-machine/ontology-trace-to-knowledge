@@ -1,13 +1,13 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-trace-to-knowledge
-# upstream-tag: v2.0.0
-# upstream-commit: 78278e66f2c9db585824ae0b1f389dd42e67ab1b
+# upstream-tag: v2.0.1
+# upstream-commit: ce5cf7be43d1d0589ee5e77eba2e2600cb7c3b1d
 # source-artifacts:
 # - package.json
 # - schema/traceToKnowledge.tql
 # - docs/translation/schema-docs.json
 # - tools/package_contract/refresh_package_contract.mjs
-# manifest: manifests/trace-to-knowledge-v2.0.0.package-manifest.json
+# manifest: manifests/trace-to-knowledge-v2.0.1.package-manifest.json
 # generator: trace-to-knowledge-package-refresh/0.1.0
 
 put $module isa OntologyModule,
@@ -15,19 +15,19 @@ put $module isa OntologyModule,
   has moduleRepoUrl "https://github.com/vibe-machine/ontology-trace-to-knowledge";
 
 put $version isa OntologyModuleVersion,
-  has moduleVersionKey "https://github.com/vibe-machine/ontology-trace-to-knowledge@2.0.0",
-  has moduleVersion "2.0.0",
-  has upstreamCommit "78278e66f2c9db585824ae0b1f389dd42e67ab1b",
-  has manifestPath "manifests/trace-to-knowledge-v2.0.0.package-manifest.json",
+  has moduleVersionKey "https://github.com/vibe-machine/ontology-trace-to-knowledge@2.0.1",
+  has moduleVersion "2.0.1",
+  has upstreamCommit "ce5cf7be43d1d0589ee5e77eba2e2600cb7c3b1d",
+  has manifestPath "manifests/trace-to-knowledge-v2.0.1.package-manifest.json",
   has generatorName "trace-to-knowledge-package-refresh",
   has generatorVersion "0.1.0",
-  has generatedAt "2026-03-28T14:03:46.832Z";
+  has generatedAt "2026-04-08T12:58:46.598Z";
 
 put (version: $version, module: $module) isa ontologyModuleVersionOf;
 
 put $s1 isa SourceArtifactRecord,
   has sourcePath "package.json",
-  has sourceSha256 "e2e0a8aad24357113b2df7f5d0bc36fba8f24b31d003705eaef58d893b170d93";
+  has sourceSha256 "d44d3806785c5f8d6bb3c68ad5c66cdf70c6cfd70a714c627c6b67dbb72e622c";
 put (version: $version, sourceArtifact: $s1) isa ontologyModuleVersionBasedOnSourceArtifact;
 
 put $s2 isa SourceArtifactRecord,
@@ -48,7 +48,7 @@ put (version: $version, sourceArtifact: $s4) isa ontologyModuleVersionBasedOnSou
 put $g1 isa GeneratedArtifactRecord,
   has artifactPath "data/trace-to-knowledge-schema-docs.tql",
   has artifactKind "documentation",
-  has artifactSha256 "4d2c1a430ace2b468b45e2c12130111f47c28a47b87261290be8777383987376";
+  has artifactSha256 "3ec5895be5e5dc8dc445dc505990722ca8dd163a825e923a394ef2b21d77e85b";
 put (generatedArtifact: $g1, version: $version) isa generatedArtifactForOntologyModuleVersion;
 
 put $g2 isa GeneratedArtifactRecord,
