@@ -1,0 +1,7 @@
+match
+  $module isa OntologyModule,
+    has moduleRepoUrl "https://github.com/vibe-machine/ontology-trace-to-knowledge";
+  $version isa OntologyModuleVersion,
+    has moduleVersion "2.0.2";
+  (version: $version, module: $module) isa ontologyModuleVersionOf;
+limit 1;
