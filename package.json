@@ -28,8 +28,8 @@
     "validate:bootstrap": "node tools/package_contract/validate_bootstrap.mjs",
     "test:typedb-bootstrap": "node tools/package_contract/validate_typedb_bootstrap.mjs",
     "test": "npm run validate:bootstrap && npm run test:typedb-bootstrap",
-    "release": "../ontology-tooling/bin/ontology-release --repo .",
-    "release:check": "../ontology-tooling/bin/ontology-release --repo . --validate-only"
+    "release": "../ontology-tooling/bin/ont release --repo .",
+    "release:check": "../ontology-tooling/bin/ont release --repo . --validate-only"
   },
   "manifests": [
     "manifests/trace-to-knowledge-v2.0.3.package-manifest.json"
