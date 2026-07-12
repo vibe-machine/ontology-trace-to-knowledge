@@ -32,16 +32,6 @@ put $module isa SchemaModule,
   has moduleName "Trace-to-Knowledge",
   has moduleKind "hand-authored-package";
 
-put $r1 isa SchemaResource,
-  has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#shodhMemoryId",
-  has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#shodhMemoryId",
-  has typeLabel "shodhMemoryId",
-  has kind "attribute",
-  has prefLabel "shodhMemoryId",
-  has definition "Optional identifier assigned by an external Shodh memory system for the same knowledge record.", 
-  has scopeNote "Use when a T2K knowledge item is synchronized with an external memory store; omit it for purely local records.";
-put (resource: $r1, module: $module) isa inModule;
-
 put $r2 isa SchemaResource,
   has docKey "https://github.com/vibe-machine/ontology-trace-to-knowledge#confidence",
   has iri "https://github.com/vibe-machine/ontology-trace-to-knowledge#confidence",

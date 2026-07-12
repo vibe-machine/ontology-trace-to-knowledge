@@ -22,7 +22,6 @@ Every knowledge item can carry:
 - `name` and `description` for human-readable guidance
 - `uniqueText` for stable textual identity when useful
 - `sourceIRI` for a durable external source pointer
-- `shodhMemoryId` when synchronized with an external memory system
 - `confidence`, `verified`, and `deprecated` to qualify trust and lifecycle
 
 T2K then specializes knowledge into four operational shapes:

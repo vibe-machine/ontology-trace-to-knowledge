@@ -7,19 +7,19 @@
   "upstream": {
     "repoUrl": "https://github.com/vibe-machine/ontology-trace-to-knowledge",
     "tag": "v2.0.3",
-    "commit": "c6062950d669204892550ab44ec5da749c291853",
+    "commit": "506be721749e8e01fdd0384270bb2652309636ac",
     "sourceArtifacts": [
       {
         "path": "package.json",
-        "sha256": "c3c7f9f09f82536ebac6ac66e7f76f5a58c4649caab173fbe303af6f3874f57b"
+        "sha256": "9b3261a728b6930b9137a409dbcca68dbd05ec5ccdb659c1601e0b2872403c7d"
       },
       {
         "path": "schema/traceToKnowledge.tql",
-        "sha256": "3a264aa23dde48c839ca758a587b2047a951e153491cf08a0de081e16f1b796a"
+        "sha256": "af4b3581303ff379959b97c008eda20a78eb1d57d01a4a1871e12e8eaa5786c2"
       },
       {
         "path": "docs/translation/schema-docs.json",
-        "sha256": "856bea90f656db7cbe6c6481e1ea38d134bb96618500c451e4be86a8e6f3e6e2"
+        "sha256": "3cd4493eb1a38ddf329770470a0f1d70999b7d37ba4b33bcc3438b8810f0eed1"
       },
       {
         "path": "tools/package_contract/refresh_package_contract.mjs",
@@ -30,13 +30,13 @@
   "generator": {
     "name": "trace-to-knowledge-package-refresh",
     "version": "0.1.0",
-    "generatedAt": "2026-04-10T14:57:10.337Z"
+    "generatedAt": "2026-07-12T19:44:01.559Z"
   },
   "artifacts": [
     {
       "kind": "documentation",
       "path": "data/trace-to-knowledge-schema-docs.tql",
-      "sha256": "8d0b7f5a9adb1fd64e03f2ae16516e298c9240b89ddb124b0594f207ca123afc"
+      "sha256": "8daa8057064716d35b0f81eaa985a4eee62cab2898dee5222fadc8ed027c0bdb"
     },
     {
       "kind": "manifest-schema",
@@ -46,12 +46,7 @@
     {
       "kind": "provenance-seeds",
       "path": "data/trace-to-knowledge-provenance.tql",
-      "sha256": "a4d4cd6e7a4a01906e6c2c6415f22a4a7ccfdc48dfa501019e93f2a29adb63cc"
-    },
-    {
-      "kind": "migration",
-      "path": "migrations/v2.0.2-to-v2.0.3.tql",
-      "sha256": "987f764c6bc301060a4adf2a088a6def39713dfd227f9aa33e1fb781d829f48c"
+      "sha256": "cb1d87333fdb8e6a461f0c4d9846f6c09fb80555367eccbcfda3f57b537244a7"
     }
   ]
 }

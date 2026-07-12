@@ -4,10 +4,6 @@
     "moduleKind": "hand-authored-package"
   },
   "resources": {
-    "shodhMemoryId": {
-      "definition": "Optional identifier assigned by an external Shodh memory system for the same knowledge record.",
-      "scopeNote": "Use when a T2K knowledge item is synchronized with an external memory store; omit it for purely local records."
-    },
     "confidence": {
       "definition": "Numeric confidence score expressing how strongly the system or operator believes a claim or linkage is correct.",
       "scopeNote": "Use a normalized score that is comparable within this package's workflows; relation-level confidence should qualify the specific assertion rather than the entity as a whole."

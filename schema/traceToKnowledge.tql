@@ -9,8 +9,6 @@ define
 # Keep only what’s not already modeled
 # ------------------------------
 
-attribute shodhMemoryId, value string;
-
 attribute confidence, value double;
 attribute verified, value boolean;
 
@@ -37,7 +35,6 @@ attribute payloadJson, value string;
 
 entity KnowledgeItem,
   sub ContentExpression,
-  owns shodhMemoryId @card(0..1),
   owns name,
   owns description,
   owns uniqueText,
@@ -46,7 +43,7 @@ entity KnowledgeItem,
   owns verified @card(0..1),
   owns deprecated @card(0..1),
 
-  plays isIdentifiedBy:isIdentifiedBySubject,
+  plays isIdentifiedBy:identifiedThing,
 
   plays resolves:failure,
   plays resolves:fix,
@@ -76,7 +73,7 @@ entity Signature,
   owns signatureText,
   owns signalKind,
   owns uniqueText,
-  plays isIdentifiedBy:isIdentifiedBySubject,
+  plays isIdentifiedBy:identifiedThing,
   plays signatureLink:signature;
 
 # ------------------------------
@@ -92,7 +89,7 @@ entity Scope,
   owns filePath @card(0..1),
   owns symbolName @card(0..1),
   owns uniqueText,
-  plays isIdentifiedBy:isIdentifiedBySubject,
+  plays isIdentifiedBy:identifiedThing,
   plays appliesTo:scope;
 
 # ------------------------------
@@ -107,7 +104,7 @@ entity EvidenceItem,
   owns idText,
   owns payloadJson @card(0..1),
   owns uniqueText,
-  plays isIdentifiedBy:isIdentifiedBySubject,
+  plays isIdentifiedBy:identifiedThing,
   plays supportedBy:evidence,
   plays extractedFrom:evidence,
   plays observedIn:evidence,
@@ -119,7 +116,7 @@ entity ExternalEvidence,
   owns idText,
   owns payloadJson @card(0..1),
   owns uniqueText,
-  plays isIdentifiedBy:isIdentifiedBySubject,
+  plays isIdentifiedBy:identifiedThing,
   plays evidenceRef:external;
 
 entity Run,
@@ -127,7 +124,7 @@ entity Run,
   owns toolName @card(0..1),
   owns languageName @card(0..1),
   owns uniqueText,
-  plays isIdentifiedBy:isIdentifiedBySubject,
+  plays isIdentifiedBy:identifiedThing,
   plays observedIn:run,
   plays extractedFrom:run;
 
