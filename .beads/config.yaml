@@ -73,3 +73,5 @@
 
 sync:
     remote: "git+ssh://git@github.com/vibe-machine/ontology-trace-to-knowledge.git"
+export:
+    auto: true
