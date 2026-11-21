@@ -8,3 +8,7 @@ node_modules/
 .beads-credential-key
 .beads/proxieddb/
 *.gate.lock*
+
+
+# APM dependencies
+apm_modules/
